@@ -1,0 +1,1538 @@
+{
+  "dataset_name": "Decide API Manual QA Dataset",
+  "version": "1.0",
+  "case_count": 100,
+  "task_counts": {
+    "route": 40,
+    "approve": 30,
+    "grounded": 30
+  },
+  "notes": [
+    "Synthetic test cases, not production data.",
+    "Expected outputs are test-set judgments. Approval expectations depend on the business policy implemented by your team.",
+    "For ambiguous approval cases, expected value is null and expected abstain is true as a desired behavior.",
+    "Evaluate aggregate performance on held-out data; a small manual dataset is not enough to establish calibration."
+  ],
+  "cases": [
+    {
+      "request": {
+        "request_id": "route-001",
+        "decision": "route",
+        "state": {
+          "subject": "Invoice for last month",
+          "body": "Please send me the VAT invoice for my previous subscription payment."
+        }
+      },
+      "expected": {
+        "value": "billing"
+      },
+      "rationale": "Expected routing category: billing."
+    },
+    {
+      "request": {
+        "request_id": "route-002",
+        "decision": "route",
+        "state": {
+          "subject": "Charged twice",
+          "body": "My card was charged two times for the same order. Please check the duplicate payment."
+        }
+      },
+      "expected": {
+        "value": "billing"
+      },
+      "rationale": "Expected routing category: billing."
+    },
+    {
+      "request": {
+        "request_id": "route-003",
+        "decision": "route",
+        "state": {
+          "subject": "Cancel subscription charge",
+          "body": "I was billed after cancelling my subscription and need help with the charge."
+        }
+      },
+      "expected": {
+        "value": "billing"
+      },
+      "rationale": "Expected routing category: billing."
+    },
+    {
+      "request": {
+        "request_id": "route-004",
+        "decision": "route",
+        "state": {
+          "subject": "Payment failed",
+          "body": "Checkout says my payment failed, but the money appears to have left my bank account."
+        }
+      },
+      "expected": {
+        "value": "billing"
+      },
+      "rationale": "Expected routing category: billing."
+    },
+    {
+      "request": {
+        "request_id": "route-005",
+        "decision": "route",
+        "state": {
+          "subject": "Refund status",
+          "body": "I returned the product last week. When will the refund appear on my statement?"
+        }
+      },
+      "expected": {
+        "value": "billing"
+      },
+      "rationale": "Expected routing category: billing."
+    },
+    {
+      "request": {
+        "request_id": "route-006",
+        "decision": "route",
+        "state": {
+          "subject": "Update billing address",
+          "body": "I need to change the billing address shown on future invoices."
+        }
+      },
+      "expected": {
+        "value": "billing"
+      },
+      "rationale": "Expected routing category: billing."
+    },
+    {
+      "request": {
+        "request_id": "route-007",
+        "decision": "route",
+        "state": {
+          "subject": "Tax receipt",
+          "body": "Could you provide a receipt showing the tax charged on my purchase?"
+        }
+      },
+      "expected": {
+        "value": "billing"
+      },
+      "rationale": "Expected routing category: billing."
+    },
+    {
+      "request": {
+        "request_id": "route-008",
+        "decision": "route",
+        "state": {
+          "subject": "Subscription price",
+          "body": "The renewal price is higher than expected. Can you explain the new charge?"
+        }
+      },
+      "expected": {
+        "value": "billing"
+      },
+      "rationale": "Expected routing category: billing."
+    },
+    {
+      "request": {
+        "request_id": "route-009",
+        "decision": "route",
+        "state": {
+          "subject": "App crashes on launch",
+          "body": "The application closes immediately whenever I open it, even after reinstalling."
+        }
+      },
+      "expected": {
+        "value": "technical"
+      },
+      "rationale": "Expected routing category: technical."
+    },
+    {
+      "request": {
+        "request_id": "route-010",
+        "decision": "route",
+        "state": {
+          "subject": "Login error code",
+          "body": "Signing in shows error 502 and the page never finishes loading."
+        }
+      },
+      "expected": {
+        "value": "technical"
+      },
+      "rationale": "Expected routing category: technical."
+    },
+    {
+      "request": {
+        "request_id": "route-011",
+        "decision": "route",
+        "state": {
+          "subject": "Feature not working",
+          "body": "The export button does nothing when I click it in the dashboard."
+        }
+      },
+      "expected": {
+        "value": "technical"
+      },
+      "rationale": "Expected routing category: technical."
+    },
+    {
+      "request": {
+        "request_id": "route-012",
+        "decision": "route",
+        "state": {
+          "subject": "Sync is stuck",
+          "body": "My data has been syncing for an hour and the progress bar has not moved."
+        }
+      },
+      "expected": {
+        "value": "technical"
+      },
+      "rationale": "Expected routing category: technical."
+    },
+    {
+      "request": {
+        "request_id": "route-013",
+        "decision": "route",
+        "state": {
+          "subject": "Installation problem",
+          "body": "The installer stops at 70 percent and displays an unexpected error."
+        }
+      },
+      "expected": {
+        "value": "technical"
+      },
+      "rationale": "Expected routing category: technical."
+    },
+    {
+      "request": {
+        "request_id": "route-014",
+        "decision": "route",
+        "state": {
+          "subject": "API returns 500",
+          "body": "Our integration receives HTTP 500 from the API for every request since this morning."
+        }
+      },
+      "expected": {
+        "value": "technical"
+      },
+      "rationale": "Expected routing category: technical."
+    },
+    {
+      "request": {
+        "request_id": "route-015",
+        "decision": "route",
+        "state": {
+          "subject": "Slow dashboard",
+          "body": "The dashboard takes nearly a minute to load and sometimes freezes."
+        }
+      },
+      "expected": {
+        "value": "technical"
+      },
+      "rationale": "Expected routing category: technical."
+    },
+    {
+      "request": {
+        "request_id": "route-016",
+        "decision": "route",
+        "state": {
+          "subject": "Browser compatibility",
+          "body": "The upload tool works in Firefox but fails in Chrome on the same machine."
+        }
+      },
+      "expected": {
+        "value": "technical"
+      },
+      "rationale": "Expected routing category: technical."
+    },
+    {
+      "request": {
+        "request_id": "route-017",
+        "decision": "route",
+        "state": {
+          "subject": "Reset my password",
+          "body": "I forgot my password and need a reset link to access my account."
+        }
+      },
+      "expected": {
+        "value": "account"
+      },
+      "rationale": "Expected routing category: account."
+    },
+    {
+      "request": {
+        "request_id": "route-018",
+        "decision": "route",
+        "state": {
+          "subject": "Account locked",
+          "body": "Several failed login attempts locked my account. Please help me regain access."
+        }
+      },
+      "expected": {
+        "value": "account"
+      },
+      "rationale": "Expected routing category: account."
+    },
+    {
+      "request": {
+        "request_id": "route-019",
+        "decision": "route",
+        "state": {
+          "subject": "Change email address",
+          "body": "I no longer use my old email and want to update the email on my profile."
+        }
+      },
+      "expected": {
+        "value": "account"
+      },
+      "rationale": "Expected routing category: account."
+    },
+    {
+      "request": {
+        "request_id": "route-020",
+        "decision": "route",
+        "state": {
+          "subject": "Two-factor authentication",
+          "body": "I lost my phone and cannot complete the two-factor authentication step."
+        }
+      },
+      "expected": {
+        "value": "account"
+      },
+      "rationale": "Expected routing category: account."
+    },
+    {
+      "request": {
+        "request_id": "route-021",
+        "decision": "route",
+        "state": {
+          "subject": "Delete my profile",
+          "body": "Please tell me how to permanently delete my account and personal profile."
+        }
+      },
+      "expected": {
+        "value": "account"
+      },
+      "rationale": "Expected routing category: account."
+    },
+    {
+      "request": {
+        "request_id": "route-022",
+        "decision": "route",
+        "state": {
+          "subject": "Suspended account",
+          "body": "My account was suspended and I would like to understand how to appeal."
+        }
+      },
+      "expected": {
+        "value": "account"
+      },
+      "rationale": "Expected routing category: account."
+    },
+    {
+      "request": {
+        "request_id": "route-023",
+        "decision": "route",
+        "state": {
+          "subject": "Update username",
+          "body": "I want to change the username displayed on my profile."
+        }
+      },
+      "expected": {
+        "value": "account"
+      },
+      "rationale": "Expected routing category: account."
+    },
+    {
+      "request": {
+        "request_id": "route-024",
+        "decision": "route",
+        "state": {
+          "subject": "Cannot access settings",
+          "body": "I can sign in, but my account settings page says I do not have permission."
+        }
+      },
+      "expected": {
+        "value": "account"
+      },
+      "rationale": "Expected routing category: account."
+    },
+    {
+      "request": {
+        "request_id": "route-025",
+        "decision": "route",
+        "state": {
+          "subject": "Package delayed",
+          "body": "Tracking says my parcel is still in transit even though it was due yesterday."
+        }
+      },
+      "expected": {
+        "value": "shipping"
+      },
+      "rationale": "Expected routing category: shipping."
+    },
+    {
+      "request": {
+        "request_id": "route-026",
+        "decision": "route",
+        "state": {
+          "subject": "Wrong delivery address",
+          "body": "My order is going to my old address. Can the delivery address still be changed?"
+        }
+      },
+      "expected": {
+        "value": "shipping"
+      },
+      "rationale": "Expected routing category: shipping."
+    },
+    {
+      "request": {
+        "request_id": "route-027",
+        "decision": "route",
+        "state": {
+          "subject": "Missing package",
+          "body": "The carrier marked my parcel delivered, but nothing arrived at my door."
+        }
+      },
+      "expected": {
+        "value": "shipping"
+      },
+      "rationale": "Expected routing category: shipping."
+    },
+    {
+      "request": {
+        "request_id": "route-028",
+        "decision": "route",
+        "state": {
+          "subject": "Track my order",
+          "body": "Please share the tracking link and current location of my shipment."
+        }
+      },
+      "expected": {
+        "value": "shipping"
+      },
+      "rationale": "Expected routing category: shipping."
+    },
+    {
+      "request": {
+        "request_id": "route-029",
+        "decision": "route",
+        "state": {
+          "subject": "Damaged box in transit",
+          "body": "The shipping box arrived crushed and the courier noted damage during delivery."
+        }
+      },
+      "expected": {
+        "value": "shipping"
+      },
+      "rationale": "Expected routing category: shipping."
+    },
+    {
+      "request": {
+        "request_id": "route-030",
+        "decision": "route",
+        "state": {
+          "subject": "Delivery date",
+          "body": "Can you confirm the estimated arrival date for order 84721?"
+        }
+      },
+      "expected": {
+        "value": "shipping"
+      },
+      "rationale": "Expected routing category: shipping."
+    },
+    {
+      "request": {
+        "request_id": "route-031",
+        "decision": "route",
+        "state": {
+          "subject": "Split shipment",
+          "body": "Only one of the two parcels has arrived. Where is the remaining package?"
+        }
+      },
+      "expected": {
+        "value": "shipping"
+      },
+      "rationale": "Expected routing category: shipping."
+    },
+    {
+      "request": {
+        "request_id": "route-032",
+        "decision": "route",
+        "state": {
+          "subject": "Courier did not call",
+          "body": "The courier did not contact me and the tracking status says delivery attempt failed."
+        }
+      },
+      "expected": {
+        "value": "shipping"
+      },
+      "rationale": "Expected routing category: shipping."
+    },
+    {
+      "request": {
+        "request_id": "route-033",
+        "decision": "route",
+        "state": {
+          "subject": "Product information",
+          "body": "Where can I read more about the company and the services you offer?"
+        }
+      },
+      "expected": {
+        "value": "general"
+      },
+      "rationale": "Expected routing category: general."
+    },
+    {
+      "request": {
+        "request_id": "route-034",
+        "decision": "route",
+        "state": {
+          "subject": "Business hours",
+          "body": "What are your customer support hours on weekends?"
+        }
+      },
+      "expected": {
+        "value": "general"
+      },
+      "rationale": "Expected routing category: general."
+    },
+    {
+      "request": {
+        "request_id": "route-035",
+        "decision": "route",
+        "state": {
+          "subject": "Give feedback",
+          "body": "I would like to share feedback about my overall experience with your service."
+        }
+      },
+      "expected": {
+        "value": "general"
+      },
+      "rationale": "Expected routing category: general."
+    },
+    {
+      "request": {
+        "request_id": "route-036",
+        "decision": "route",
+        "state": {
+          "subject": "Contact support",
+          "body": "What is the best way to contact your team for a general question?"
+        }
+      },
+      "expected": {
+        "value": "general"
+      },
+      "rationale": "Expected routing category: general."
+    },
+    {
+      "request": {
+        "request_id": "route-037",
+        "decision": "route",
+        "state": {
+          "subject": "Partnership inquiry",
+          "body": "Does your company have a partner program for small businesses?"
+        }
+      },
+      "expected": {
+        "value": "general"
+      },
+      "rationale": "Expected routing category: general."
+    },
+    {
+      "request": {
+        "request_id": "route-038",
+        "decision": "route",
+        "state": {
+          "subject": "Accessibility information",
+          "body": "Do you provide accessibility options for customers using screen readers?"
+        }
+      },
+      "expected": {
+        "value": "general"
+      },
+      "rationale": "Expected routing category: general."
+    },
+    {
+      "request": {
+        "request_id": "route-039",
+        "decision": "route",
+        "state": {
+          "subject": "Thank you",
+          "body": "Thanks for helping me earlier. I appreciate the quick response."
+        }
+      },
+      "expected": {
+        "value": "general"
+      },
+      "rationale": "Expected routing category: general."
+    },
+    {
+      "request": {
+        "request_id": "route-040",
+        "decision": "route",
+        "state": {
+          "subject": "Unclear request",
+          "body": "I have a question about something and would like some information."
+        }
+      },
+      "expected": {
+        "value": "general"
+      },
+      "rationale": "Expected routing category: general."
+    },
+    {
+      "request": {
+        "request_id": "approve-001",
+        "decision": "approve",
+        "state": {
+          "subject": "Verified duplicate charge",
+          "body": "Payment logs confirm two charges for the same order. The duplicate transaction is verified.",
+          "amount": 15,
+          "customer_tier": "premium"
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+    },
+    {
+      "request": {
+        "request_id": "approve-002",
+        "decision": "approve",
+        "state": {
+          "subject": "Refund after confirmed damage",
+          "body": "Inspection photos and warehouse notes confirm the item arrived broken. Policy permits a refund.",
+          "amount": 35,
+          "customer_tier": "standard"
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+    },
+    {
+      "request": {
+        "request_id": "approve-003",
+        "decision": "approve",
+        "state": {
+          "subject": "Refund within return window",
+          "body": "The item is unused, proof of purchase is present, and the request is within the 30-day return window.",
+          "amount": 49,
+          "customer_tier": "standard"
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+    },
+    {
+      "request": {
+        "request_id": "approve-004",
+        "decision": "approve",
+        "state": {
+          "subject": "Duplicate subscription payment",
+          "body": "Billing records show two successful charges for one subscription period.",
+          "amount": 20,
+          "customer_tier": "free"
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+    },
+    {
+      "request": {
+        "request_id": "approve-005",
+        "decision": "approve",
+        "state": {
+          "subject": "Service outage credit",
+          "body": "Monitoring confirms a four-hour outage, and policy allows a credit for this duration.",
+          "amount": 25,
+          "customer_tier": "premium"
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+    },
+    {
+      "request": {
+        "request_id": "approve-006",
+        "decision": "approve",
+        "state": {
+          "subject": "Wrong item shipped",
+          "body": "Packing records and customer photos confirm the wrong item was shipped. Policy allows a refund.",
+          "amount": 60,
+          "customer_tier": "standard"
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+    },
+    {
+      "request": {
+        "request_id": "approve-007",
+        "decision": "approve",
+        "state": {
+          "subject": "Cancelled before renewal",
+          "body": "Cancellation timestamp is before renewal, but billing logs show a renewal charge afterward.",
+          "amount": 12,
+          "customer_tier": "free"
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+    },
+    {
+      "request": {
+        "request_id": "approve-008",
+        "decision": "approve",
+        "state": {
+          "subject": "Price adjustment guarantee",
+          "body": "Purchase is within the published price-adjustment window and the lower price is documented.",
+          "amount": 18,
+          "customer_tier": "premium"
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+    },
+    {
+      "request": {
+        "request_id": "approve-009",
+        "decision": "approve",
+        "state": {
+          "subject": "No evidence for defect",
+          "body": "Customer reports a defect but provides no photos, diagnostics, or other details.",
+          "amount": 80,
+          "customer_tier": "standard"
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+    },
+    {
+      "request": {
+        "request_id": "approve-010",
+        "decision": "approve",
+        "state": {
+          "subject": "Outside return window",
+          "body": "The request was submitted 90 days after delivery. Policy allows returns only within 30 days.",
+          "amount": 120,
+          "customer_tier": "free"
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+    },
+    {
+      "request": {
+        "request_id": "approve-011",
+        "decision": "approve",
+        "state": {
+          "subject": "Repeated refund already issued",
+          "body": "Ledger confirms a full refund was already completed for this order. Customer requests it again.",
+          "amount": 45,
+          "customer_tier": "standard"
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+    },
+    {
+      "request": {
+        "request_id": "approve-012",
+        "decision": "approve",
+        "state": {
+          "subject": "No matching transaction",
+          "body": "The order ID and payment reference do not match any transaction.",
+          "amount": 30,
+          "customer_tier": "free"
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+    },
+    {
+      "request": {
+        "request_id": "approve-013",
+        "decision": "approve",
+        "state": {
+          "subject": "Digital item consumed",
+          "body": "Logs show the digital product was consumed. Policy says consumed digital items are non-refundable.",
+          "amount": 25,
+          "customer_tier": "standard"
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+    },
+    {
+      "request": {
+        "request_id": "approve-014",
+        "decision": "approve",
+        "state": {
+          "subject": "Personal preference",
+          "body": "Customer says the product did not meet expectations. No defect or policy exception is reported.",
+          "amount": 80,
+          "customer_tier": "standard"
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+    },
+    {
+      "request": {
+        "request_id": "approve-015",
+        "decision": "approve",
+        "state": {
+          "subject": "Claim conflicts with tracking",
+          "body": "Customer claims non-delivery, but carrier proof shows delivery with a matching signature.",
+          "amount": 55,
+          "customer_tier": "free"
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+    },
+    {
+      "request": {
+        "request_id": "approve-016",
+        "decision": "approve",
+        "state": {
+          "subject": "Suspicious repeated claims",
+          "body": "The account has multiple similar claims under review. This claim is not verified.",
+          "amount": 95,
+          "customer_tier": "standard"
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+    },
+    {
+      "request": {
+        "request_id": "approve-017",
+        "decision": "approve",
+        "state": {
+          "subject": "Refund request, sparse details",
+          "body": "Customer asks for a refund. No order details, reason, or evidence are available.",
+          "amount": 80,
+          "customer_tier": "standard"
+        }
+      },
+      "expected": {
+        "value": null,
+        "abstain": true
+      },
+      "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+    },
+    {
+      "request": {
+        "request_id": "approve-018",
+        "decision": "approve",
+        "state": {
+          "subject": "Partial evidence of damage",
+          "body": "Customer reports damage and provides one unclear photo. Cause and extent cannot be determined.",
+          "amount": 65,
+          "customer_tier": "standard"
+        }
+      },
+      "expected": {
+        "value": null,
+        "abstain": true
+      },
+      "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+    },
+    {
+      "request": {
+        "request_id": "approve-019",
+        "decision": "approve",
+        "state": {
+          "subject": "Unclear billing dispute",
+          "body": "Customer says the amount looks wrong, but no invoice or transaction record is attached.",
+          "amount": 42,
+          "customer_tier": "free"
+        }
+      },
+      "expected": {
+        "value": null,
+        "abstain": true
+      },
+      "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+    },
+    {
+      "request": {
+        "request_id": "approve-020",
+        "decision": "approve",
+        "state": {
+          "subject": "Possible duplicate payment",
+          "body": "Customer believes a duplicate charge occurred, but only one transaction is visible.",
+          "amount": 20,
+          "customer_tier": "premium"
+        }
+      },
+      "expected": {
+        "value": null,
+        "abstain": true
+      },
+      "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+    },
+    {
+      "request": {
+        "request_id": "approve-021",
+        "decision": "approve",
+        "state": {
+          "subject": "Delivery complaint with no tracking",
+          "body": "Customer says the order did not arrive. No tracking or carrier confirmation is available.",
+          "amount": 50,
+          "customer_tier": "standard"
+        }
+      },
+      "expected": {
+        "value": null,
+        "abstain": true
+      },
+      "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+    },
+    {
+      "request": {
+        "request_id": "approve-022",
+        "decision": "approve",
+        "state": {
+          "subject": "Exceptional refund request",
+          "body": "Customer requests an exception due to personal circumstances. No policy or supporting documents are included.",
+          "amount": 100,
+          "customer_tier": "premium"
+        }
+      },
+      "expected": {
+        "value": null,
+        "abstain": true
+      },
+      "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+    },
+    {
+      "request": {
+        "request_id": "approve-023",
+        "decision": "approve",
+        "state": {
+          "subject": "Low-value refund, unclear reason",
+          "body": "A small refund is requested, but eligibility is not explained.",
+          "amount": 5,
+          "customer_tier": "free"
+        }
+      },
+      "expected": {
+        "value": null,
+        "abstain": true
+      },
+      "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+    },
+    {
+      "request": {
+        "request_id": "approve-024",
+        "decision": "approve",
+        "state": {
+          "subject": "Refund after replacement",
+          "body": "A replacement was shipped. Customer now requests a refund, but policy on both is unspecified.",
+          "amount": 70,
+          "customer_tier": "standard"
+        }
+      },
+      "expected": {
+        "value": null,
+        "abstain": true
+      },
+      "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+    },
+    {
+      "request": {
+        "request_id": "approve-025",
+        "decision": "approve",
+        "state": {
+          "subject": "Verified missing accessory",
+          "body": "Evidence and packing checklist confirm a required accessory was omitted. Policy allows reimbursement.",
+          "amount": 10,
+          "customer_tier": "free"
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+    },
+    {
+      "request": {
+        "request_id": "approve-026",
+        "decision": "approve",
+        "state": {
+          "subject": "Warranty expired",
+          "body": "The device failed after warranty expiry, and no extended coverage is present.",
+          "amount": 200,
+          "customer_tier": "standard"
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+    },
+    {
+      "request": {
+        "request_id": "approve-027",
+        "decision": "approve",
+        "state": {
+          "subject": "Charge reversed by bank",
+          "body": "The bank confirms the disputed transaction has already been reversed.",
+          "amount": 40,
+          "customer_tier": "standard"
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+    },
+    {
+      "request": {
+        "request_id": "approve-028",
+        "decision": "approve",
+        "state": {
+          "subject": "Verified billing plan mismatch",
+          "body": "Signed plan is $10/month, but invoices show a $30 monthly charge for three months.",
+          "amount": 60,
+          "customer_tier": "premium"
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+    },
+    {
+      "request": {
+        "request_id": "approve-029",
+        "decision": "approve",
+        "state": {
+          "subject": "Refund pending investigation",
+          "body": "The claim may be eligible, but the required fraud review is still open.",
+          "amount": 150,
+          "customer_tier": "standard"
+        }
+      },
+      "expected": {
+        "value": null,
+        "abstain": true
+      },
+      "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+    },
+    {
+      "request": {
+        "request_id": "approve-030",
+        "decision": "approve",
+        "state": {
+          "subject": "Unsupported high-value claim",
+          "body": "Customer requests a large reimbursement but provides no receipt, order reference, or evidence.",
+          "amount": 450,
+          "customer_tier": "free"
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+    },
+    {
+      "request": {
+        "request_id": "grounded-001",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "Orders are dispatched within 2 business days.",
+          "kb_article": "Orders are dispatched within 2 business days of order confirmation."
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+    },
+    {
+      "request": {
+        "request_id": "grounded-002",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "We guarantee delivery within 2 hours.",
+          "kb_article": "Orders are dispatched within 2 business days. Delivery times are not guaranteed."
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+    },
+    {
+      "request": {
+        "request_id": "grounded-003",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "You can reset your password using the Forgot Password link.",
+          "kb_article": "Select Forgot Password on the sign-in page to receive a reset email."
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+    },
+    {
+      "request": {
+        "request_id": "grounded-004",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "Your refund will arrive tomorrow.",
+          "kb_article": "Refunds are processed within 5–10 business days. Exact arrival dates are not guaranteed."
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+    },
+    {
+      "request": {
+        "request_id": "grounded-005",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "Support is available Monday through Friday, 9 AM to 5 PM.",
+          "kb_article": "Our support team is available on weekdays from 9:00 AM to 5:00 PM."
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+    },
+    {
+      "request": {
+        "request_id": "grounded-006",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "Support is open 24 hours a day.",
+          "kb_article": "Our support team is available on weekdays from 9:00 AM to 5:00 PM."
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+    },
+    {
+      "request": {
+        "request_id": "grounded-007",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "You may return unused items within 30 days of delivery.",
+          "kb_article": "Unused items may be returned within 30 days after delivery with proof of purchase."
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+    },
+    {
+      "request": {
+        "request_id": "grounded-008",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "All products can be returned at any time, even after use.",
+          "kb_article": "Unused items may be returned within 30 days after delivery with proof of purchase."
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+    },
+    {
+      "request": {
+        "request_id": "grounded-009",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "We use express courier for most domestic orders.",
+          "kb_article": "Domestic orders are generally shipped using express courier."
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+    },
+    {
+      "request": {
+        "request_id": "grounded-010",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "Every order arrives the same day.",
+          "kb_article": "Domestic orders are generally shipped using express courier. Delivery time varies by location."
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+    },
+    {
+      "request": {
+        "request_id": "grounded-011",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "The basic plan includes 5 projects.",
+          "kb_article": "The basic plan allows up to five active projects."
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+    },
+    {
+      "request": {
+        "request_id": "grounded-012",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "The basic plan includes unlimited projects.",
+          "kb_article": "The basic plan allows up to five active projects."
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+    },
+    {
+      "request": {
+        "request_id": "grounded-013",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "We cannot guarantee a delivery date.",
+          "kb_article": "Delivery dates are estimates and may change."
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+    },
+    {
+      "request": {
+        "request_id": "grounded-014",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "Your parcel is definitely lost.",
+          "kb_article": "Tracking shows the parcel is still in transit."
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+    },
+    {
+      "request": {
+        "request_id": "grounded-015",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "Please provide your order number so we can investigate.",
+          "kb_article": "Customers should provide an order number when contacting support about an order."
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+    },
+    {
+      "request": {
+        "request_id": "grounded-016",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "No order number is needed for an investigation.",
+          "kb_article": "Customers should provide an order number when contacting support about an order."
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+    },
+    {
+      "request": {
+        "request_id": "grounded-017",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "The service is compatible with Windows 11.",
+          "kb_article": "Supported operating systems are Windows 10 and Windows 11."
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+    },
+    {
+      "request": {
+        "request_id": "grounded-018",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "The service supports Linux and macOS.",
+          "kb_article": "Supported operating systems are Windows 10 and Windows 11."
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+    },
+    {
+      "request": {
+        "request_id": "grounded-019",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "Your account can be unlocked after identity verification.",
+          "kb_article": "Locked accounts can be restored after successful identity verification."
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+    },
+    {
+      "request": {
+        "request_id": "grounded-020",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "We can unlock any account without verification.",
+          "kb_article": "Locked accounts can be restored after successful identity verification."
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+    },
+    {
+      "request": {
+        "request_id": "grounded-021",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "The premium plan includes priority support.",
+          "kb_article": "Premium subscribers receive priority support."
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+    },
+    {
+      "request": {
+        "request_id": "grounded-022",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "The free plan includes priority support.",
+          "kb_article": "Premium subscribers receive priority support. Free subscribers use standard support."
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+    },
+    {
+      "request": {
+        "request_id": "grounded-023",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "Your data is retained for 30 days after account closure.",
+          "kb_article": "After account closure, data is retained for 30 days before deletion."
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+    },
+    {
+      "request": {
+        "request_id": "grounded-024",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "Your data is deleted immediately when you close your account.",
+          "kb_article": "After account closure, data is retained for 30 days before deletion."
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+    },
+    {
+      "request": {
+        "request_id": "grounded-025",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "We offer refunds for duplicate charges after verification.",
+          "kb_article": "Verified duplicate charges are eligible for a refund."
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+    },
+    {
+      "request": {
+        "request_id": "grounded-026",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "All refund requests are automatically approved.",
+          "kb_article": "Refunds are reviewed against eligibility criteria and are not guaranteed."
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+    },
+    {
+      "request": {
+        "request_id": "grounded-027",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "The app supports CSV export.",
+          "kb_article": "Users can export reports as CSV files from the Reports page."
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+    },
+    {
+      "request": {
+        "request_id": "grounded-028",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "The app exports reports to PDF and Excel.",
+          "kb_article": "Users can export reports as CSV files from the Reports page."
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+    },
+    {
+      "request": {
+        "request_id": "grounded-029",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "I can help you check the status, but I cannot confirm an exact arrival date from this information.",
+          "kb_article": "Tracking status is available in the order page. Delivery estimates may change."
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+    },
+    {
+      "request": {
+        "request_id": "grounded-030",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "Your order will arrive tomorrow at 10 AM.",
+          "kb_article": "Tracking status is available in the order page. Delivery estimates may change."
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+    }
+  ]
+}

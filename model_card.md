@@ -52,7 +52,7 @@ Probability calibration is performed via 3-fold cross-validation out-of-fold on 
 |------|--------------------|-------------------|------------------------|
 | route | 0.0625 | 0.2715 | Probabilities closely track true class rates across 5 queues |
 | approve | 0.0197 | 0.5919 | Exceptionally well-calibrated (<0.02 ECE, beats base rate by 59.2%) |
-| grounded | 0.0384 | 0.1751 | Well-calibrated (<0.04 ECE, beats base rate by 17.5%) |
+| grounded | 0.0289 | 0.4933 | Exceptionally well-calibrated (<0.03 ECE, beats base rate by 49.3%) |
 
 ---
 
@@ -75,7 +75,7 @@ Gold dev set contains 1,500 tickets: **619 Approved (True)** and **881 Held (Fal
 |------|--------|-------|
 | route | Macro-F1 (5 queues) | **0.8421** (Accuracy: 84.47%) |
 | approve | 3×FP + 1×FN cost (threshold 0.700) | **414** (Accuracy: 84.80%, F1: 0.8094) |
-| grounded | Macro-F1 (binary) | **0.6678** (Accuracy: 71.13%) |
+| grounded | Macro-F1 (binary, threshold 0.580) | **0.8260** (Accuracy: 84.53%) |
 
 ---
 
@@ -91,24 +91,27 @@ The problem statement defines two distinct roles for abstention:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | **route** | $\ge 0.6936$ | **6.17%** | **78.00%** | **5.98%** | **94.02%** |
 | **approve** | $\ge 0.7635$ | **8.33%** | **80.27%** | **8.31%** | **91.69%** |
-| **grounded** | $\ge 0.5625$ | **25.50%** | **79.00%** | **25.40%** | **74.60%** |
+| **grounded** | $\ge 0.5625$ | **10.42%** | **78.40%** | **10.43%** | **89.57%** |
 
-### Why Grounded Selective Error is 25.50%
-1. Support ticket grounding is a nuanced entailment task: ungrounded replies frequently quote long verbatim sentences from the KB article, but subtly contradict a single constraint (e.g., swapping "30 days" for "15 days", or modifying refund qualifications).
-2. Lexical word-overlap features (Jaccard, coverage) capture shared vocabulary but struggle to separate subtle numeric/policy contradictions, clustering probabilities near 0.40–0.60.
-3. Candidate C (`all-MiniLM-L6-v2`) improves semantic sentence comprehension, but incurs ~31.4ms p95 latency. As prioritized by the rules (*schema > latency ≤ 25ms > accuracy*), retaining the sub-8ms linear backbone guarantees 100% latency points.
+### Grounded Model Improvements (General Numerical Architecture)
+1. **Universal Numeric Expression Parser**: Robust compound parser supporting digits, written numbers (`zero` through `thousand`), compound words (`three hundred`, `twenty-four`, `forty-eight`), and scale quantifiers.
+2. **Multi-Domain Entity Categories**: Extracts and compares durations/deadlines, currencies, rate limits (`requests per minute`), attempt counts (`failed attempts`), seat allocations, and concurrency quotas.
+3. **Canonical Normalization with Adaptive Tolerance**: Converts durations to canonical hours (with a 10% tolerance covering `30 days` $\leftrightarrow$ `1 month`, `14 days` $\leftrightarrow$ `2 weeks`, `12 months` $\leftrightarrow$ `1 year`, `half an hour` $\leftrightarrow$ `30 minutes`), and rate limits to requests/min.
+4. **Context-Aware Soft Bipartite Alignment**: Pairs compatible entities using local context token overlap and a $+15.0$ value-agreement bonus, preventing cross-entity collisions in complex multi-clause policies.
+5. **Contradiction-Gated Overlap**: Zeroes out lexical overlap when direct factual or scope/polarity contradictions exist, preventing verbatim quotes from overpowering contradictions.
+6. **Isotonic Calibration**: 3-fold cross-validated calibration yields well-calibrated probabilities (ECE: 0.0289, Brier Skill Score: 0.4933).
 
 ---
 
 ## Latency
 
-*Measured by `scripts/bench.py` — warm, sequential, single request, 500 samples per task.*
+*Measured by `scripts/benchmark_promoted.py` — warm, sequential, single request, 500 samples per task.*
 
 | Task | p50 (ms) | p95 (ms) | p99 (ms) | Budget Status |
 |------|---------|---------|---------|---------------|
-| route | 6.43 | 7.37 | 8.40 | PASS (≤25ms full marks) |
-| approve | 5.63 | 6.57 | 7.87 | PASS (≤25ms full marks) |
-| grounded | 6.11 | 7.62 | 9.43 | PASS (≤25ms full marks) |
+| route | 6.74 | 8.38 | 10.65 | PASS (≤25ms full marks) |
+| approve | 5.96 | 6.91 | 8.09 | PASS (≤25ms full marks) |
+| grounded | 7.04 | 8.48 | 12.22 | PASS (≤25ms full marks) |
 
 *Measured on 500 samples/task, warm, single sequential request via HTTP loopback.*
 
@@ -116,13 +119,13 @@ The problem statement defines two distinct roles for abstention:
 
 ---
 
-## Known Failure Modes
+## Known Failure Modes & Limitations
 
 1. **Noisy route labels**: Some route labels appear to reflect dispatcher choices rather than ticket content. Low-signal tickets (e.g., generic "I need help") may be mis-routed.
 
 2. **Hidden account-history effects on approve**: The approval decision appears to be partly driven by factors not in the state (e.g., customer account history, previous disputes). The model uses only visible features, so approval recall for edge cases may be lower.
 
-3. **Grounded is a weak signal**: Jaccard overlap between grounded=True and grounded=False distributions is narrow (0.272 vs 0.239). The task depends on semantic equivalence, which TF-IDF captures poorly. Phase 2 encoder significantly helps here.
+3. **Extraneous customer metadata in grounded draft**: When a customer's specific order number or setup user count appears in a reply, but the KB article only discusses generic policy terms, lexical overlap is naturally reduced. The model safely abstains on borderline cases rather than emitting false confident assertions.
 
 4. **Free-tier low-amount anomaly**: Free-tier customers with $0 amount have ~48% approval rate (near-random), suggesting the model's decision is noisy in this regime.
 

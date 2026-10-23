@@ -1,0 +1,1539 @@
+{
+  "dataset_name": "Decide Fresh Manual QA Dataset",
+  "version": "1.0",
+  "case_count": 100,
+  "task_counts": {
+    "route": 40,
+    "approve": 30,
+    "grounded": 30
+  },
+  "notes": [
+    "100 newly authored synthetic cases created to differ in wording and scenario from the prior 100-case manual QA dataset.",
+    "This is a fresh evaluation set, not proof that the cases are unseen by any training corpus.",
+    "Approval labels are illustrative. Replace or confirm them against the actual business policy before using them as ground truth.",
+    "Cases with expected value null have expected abstain true; these are intended for abstention behavior testing.",
+    "Do not train or tune on this set if you intend to use it as a held-out evaluation set."
+  ],
+  "cases": [
+    {
+      "request": {
+        "request_id": "route-new-001",
+        "decision": "route",
+        "state": {
+          "subject": "VAT number missing from invoice",
+          "body": "The tax registration identifier is absent from the invoice PDF for our latest purchase."
+        }
+      },
+      "expected": {
+        "value": "billing"
+      },
+      "rationale": "New synthetic routing example. Expected queue: billing; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-002",
+        "decision": "route",
+        "state": {
+          "subject": "Unexpected currency conversion fee",
+          "body": "My statement includes a conversion surcharge that was not shown at checkout."
+        }
+      },
+      "expected": {
+        "value": "billing"
+      },
+      "rationale": "New synthetic routing example. Expected queue: billing; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-003",
+        "decision": "route",
+        "state": {
+          "subject": "Proration after plan downgrade",
+          "body": "I changed to the smaller plan mid-cycle and need an explanation of the prorated charge."
+        }
+      },
+      "expected": {
+        "value": "billing"
+      },
+      "rationale": "New synthetic routing example. Expected queue: billing; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-004",
+        "decision": "route",
+        "state": {
+          "subject": "Invoice paid but marked overdue",
+          "body": "Our bank transfer cleared three days ago, but the account still shows an unpaid invoice."
+        }
+      },
+      "expected": {
+        "value": "billing"
+      },
+      "rationale": "New synthetic routing example. Expected queue: billing; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-005",
+        "decision": "route",
+        "state": {
+          "subject": "Tax exemption certificate",
+          "body": "Please update our account using the tax exemption certificate attached to this message."
+        }
+      },
+      "expected": {
+        "value": "billing"
+      },
+      "rationale": "New synthetic routing example. Expected queue: billing; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-006",
+        "decision": "route",
+        "state": {
+          "subject": "Credit note request",
+          "body": "Our finance department needs a credit note for the cancelled line item."
+        }
+      },
+      "expected": {
+        "value": "billing"
+      },
+      "rationale": "New synthetic routing example. Expected queue: billing; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-007",
+        "decision": "route",
+        "state": {
+          "subject": "Annual renewal quote",
+          "body": "Can you confirm the total cost before our yearly contract renews?"
+        }
+      },
+      "expected": {
+        "value": "billing"
+      },
+      "rationale": "New synthetic routing example. Expected queue: billing; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-008",
+        "decision": "route",
+        "state": {
+          "subject": "Refund to expired card",
+          "body": "The refund was sent to a card that has since expired; how can we receive it?"
+        }
+      },
+      "expected": {
+        "value": "billing"
+      },
+      "rationale": "New synthetic routing example. Expected queue: billing; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-009",
+        "decision": "route",
+        "state": {
+          "subject": "Mobile app drains battery",
+          "body": "The mobile client uses most of my battery even while it is sitting idle."
+        }
+      },
+      "expected": {
+        "value": "technical"
+      },
+      "rationale": "New synthetic routing example. Expected queue: technical; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-010",
+        "decision": "route",
+        "state": {
+          "subject": "Webhook events missing",
+          "body": "Our endpoint receives order-created events but never receives order-updated notifications."
+        }
+      },
+      "expected": {
+        "value": "technical"
+      },
+      "rationale": "New synthetic routing example. Expected queue: technical; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-011",
+        "decision": "route",
+        "state": {
+          "subject": "CSV import rejects valid rows",
+          "body": "The importer rejects rows with dates formatted as YYYY-MM-DD, although the guide says that format is accepted."
+        }
+      },
+      "expected": {
+        "value": "technical"
+      },
+      "rationale": "New synthetic routing example. Expected queue: technical; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-012",
+        "decision": "route",
+        "state": {
+          "subject": "Audio playback cuts out",
+          "body": "Recorded lessons stop playing after about thirty seconds on multiple headphones."
+        }
+      },
+      "expected": {
+        "value": "technical"
+      },
+      "rationale": "New synthetic routing example. Expected queue: technical; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-013",
+        "decision": "route",
+        "state": {
+          "subject": "Dashboard metrics stale",
+          "body": "The analytics page has shown yesterday's numbers all morning despite new activity."
+        }
+      },
+      "expected": {
+        "value": "technical"
+      },
+      "rationale": "New synthetic routing example. Expected queue: technical; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-014",
+        "decision": "route",
+        "state": {
+          "subject": "SDK dependency conflict",
+          "body": "Installing the latest Python SDK causes a dependency resolver conflict in our environment."
+        }
+      },
+      "expected": {
+        "value": "technical"
+      },
+      "rationale": "New synthetic routing example. Expected queue: technical; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-015",
+        "decision": "route",
+        "state": {
+          "subject": "Two monitors cause layout bug",
+          "body": "When the window is moved to the external monitor, the settings panel becomes clipped."
+        }
+      },
+      "expected": {
+        "value": "technical"
+      },
+      "rationale": "New synthetic routing example. Expected queue: technical; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-016",
+        "decision": "route",
+        "state": {
+          "subject": "Search returns duplicate results",
+          "body": "The same record appears several times in search results when filters are enabled."
+        }
+      },
+      "expected": {
+        "value": "technical"
+      },
+      "rationale": "New synthetic routing example. Expected queue: technical; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-017",
+        "decision": "route",
+        "state": {
+          "subject": "Invitation email not received",
+          "body": "A teammate accepted no invitation because the invite message never arrived, including in spam."
+        }
+      },
+      "expected": {
+        "value": "account"
+      },
+      "rationale": "New synthetic routing example. Expected queue: account; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-018",
+        "decision": "route",
+        "state": {
+          "subject": "Authenticator recovery",
+          "body": "I replaced my phone and need to reconnect my authenticator app to sign in."
+        }
+      },
+      "expected": {
+        "value": "account"
+      },
+      "rationale": "New synthetic routing example. Expected queue: account; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-019",
+        "decision": "route",
+        "state": {
+          "subject": "Change legal organization name",
+          "body": "Our company has changed its registered name and needs the workspace profile updated."
+        }
+      },
+      "expected": {
+        "value": "account"
+      },
+      "rationale": "New synthetic routing example. Expected queue: account; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-020",
+        "decision": "route",
+        "state": {
+          "subject": "Remove former employee",
+          "body": "Please revoke a former contractor's workspace access without deleting shared projects."
+        }
+      },
+      "expected": {
+        "value": "account"
+      },
+      "rationale": "New synthetic routing example. Expected queue: account; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-021",
+        "decision": "route",
+        "state": {
+          "subject": "Role assignment denied",
+          "body": "I am an owner but cannot assign the analyst role to a new colleague."
+        }
+      },
+      "expected": {
+        "value": "account"
+      },
+      "rationale": "New synthetic routing example. Expected queue: account; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-022",
+        "decision": "route",
+        "state": {
+          "subject": "Merge duplicate profiles",
+          "body": "I accidentally created two profiles with different email addresses and want to consolidate them."
+        }
+      },
+      "expected": {
+        "value": "account"
+      },
+      "rationale": "New synthetic routing example. Expected queue: account; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-023",
+        "decision": "route",
+        "state": {
+          "subject": "Transfer workspace ownership",
+          "body": "The current workspace owner is leaving, and ownership needs to move to another administrator."
+        }
+      },
+      "expected": {
+        "value": "account"
+      },
+      "rationale": "New synthetic routing example. Expected queue: account; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-024",
+        "decision": "route",
+        "state": {
+          "subject": "Recovery codes unavailable",
+          "body": "I saved no backup codes and the device used for authentication is no longer available."
+        }
+      },
+      "expected": {
+        "value": "account"
+      },
+      "rationale": "New synthetic routing example. Expected queue: account; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-025",
+        "decision": "route",
+        "state": {
+          "subject": "Customs clearance delay",
+          "body": "The carrier says my international parcel is waiting for customs documentation."
+        }
+      },
+      "expected": {
+        "value": "shipping"
+      },
+      "rationale": "New synthetic routing example. Expected queue: shipping; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-026",
+        "decision": "route",
+        "state": {
+          "subject": "Locker pickup code missing",
+          "body": "The parcel is at a collection locker, but the pickup PIN was not sent to me."
+        }
+      },
+      "expected": {
+        "value": "shipping"
+      },
+      "rationale": "New synthetic routing example. Expected queue: shipping; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-027",
+        "decision": "route",
+        "state": {
+          "subject": "Partial delivery of furniture set",
+          "body": "Two chairs arrived, but the table from the same shipment is still missing."
+        }
+      },
+      "expected": {
+        "value": "shipping"
+      },
+      "rationale": "New synthetic routing example. Expected queue: shipping; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-028",
+        "decision": "route",
+        "state": {
+          "subject": "Courier left parcel at wrong building",
+          "body": "The delivery photo shows a lobby across the street from my registered address."
+        }
+      },
+      "expected": {
+        "value": "shipping"
+      },
+      "rationale": "New synthetic routing example. Expected queue: shipping; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-029",
+        "decision": "route",
+        "state": {
+          "subject": "Weekend delivery request",
+          "body": "Can the carrier deliver the package on Saturday instead of the currently listed Monday?"
+        }
+      },
+      "expected": {
+        "value": "shipping"
+      },
+      "rationale": "New synthetic routing example. Expected queue: shipping; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-030",
+        "decision": "route",
+        "state": {
+          "subject": "Return label QR code",
+          "body": "I need a scannable return label because the printer at home is broken."
+        }
+      },
+      "expected": {
+        "value": "shipping"
+      },
+      "rationale": "New synthetic routing example. Expected queue: shipping; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-031",
+        "decision": "route",
+        "state": {
+          "subject": "Shipment held for address check",
+          "body": "Tracking says the carrier has paused dispatch while verifying my apartment number."
+        }
+      },
+      "expected": {
+        "value": "shipping"
+      },
+      "rationale": "New synthetic routing example. Expected queue: shipping; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-032",
+        "decision": "route",
+        "state": {
+          "subject": "Packaging size restriction",
+          "body": "The courier refused collection because the box exceeds the service's permitted dimensions."
+        }
+      },
+      "expected": {
+        "value": "shipping"
+      },
+      "rationale": "New synthetic routing example. Expected queue: shipping; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-033",
+        "decision": "route",
+        "state": {
+          "subject": "Request for product roadmap",
+          "body": "Is there a public roadmap showing features planned for the next two quarters?"
+        }
+      },
+      "expected": {
+        "value": "general"
+      },
+      "rationale": "New synthetic routing example. Expected queue: general; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-034",
+        "decision": "route",
+        "state": {
+          "subject": "Accessibility statement location",
+          "body": "Where can I find your published accessibility conformance statement?"
+        }
+      },
+      "expected": {
+        "value": "general"
+      },
+      "rationale": "New synthetic routing example. Expected queue: general; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-035",
+        "decision": "route",
+        "state": {
+          "subject": "Partner event participation",
+          "body": "Does your team attend industry conferences or host community meetups?"
+        }
+      },
+      "expected": {
+        "value": "general"
+      },
+      "rationale": "New synthetic routing example. Expected queue: general; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-036",
+        "decision": "route",
+        "state": {
+          "subject": "Language availability",
+          "body": "Which interface languages can customers select today?"
+        }
+      },
+      "expected": {
+        "value": "general"
+      },
+      "rationale": "New synthetic routing example. Expected queue: general; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-037",
+        "decision": "route",
+        "state": {
+          "subject": "Invoice export documentation",
+          "body": "Where is the guide explaining how finance teams can export historical records?"
+        }
+      },
+      "expected": {
+        "value": "general"
+      },
+      "rationale": "New synthetic routing example. Expected queue: general; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-038",
+        "decision": "route",
+        "state": {
+          "subject": "Environmental policy inquiry",
+          "body": "Do you publish information about packaging materials and sustainability practices?"
+        }
+      },
+      "expected": {
+        "value": "general"
+      },
+      "rationale": "New synthetic routing example. Expected queue: general; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-039",
+        "decision": "route",
+        "state": {
+          "subject": "Request a sales presentation",
+          "body": "Could someone share an overview deck describing the service for our leadership team?"
+        }
+      },
+      "expected": {
+        "value": "general"
+      },
+      "rationale": "New synthetic routing example. Expected queue: general; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "route-new-040",
+        "decision": "route",
+        "state": {
+          "subject": "Newsletter subscription",
+          "body": "How can I subscribe to product announcements without receiving promotional offers?"
+        }
+      },
+      "expected": {
+        "value": "general"
+      },
+      "rationale": "New synthetic routing example. Expected queue: general; confirm against your actual queue taxonomy."
+    },
+    {
+      "request": {
+        "request_id": "approve-new-001",
+        "decision": "approve",
+        "state": {
+          "subject": "Metered usage overcharge verified",
+          "body": "Usage ledger records 120 units, while the invoice billed 210; the discrepancy is confirmed by an administrator.",
+          "amount": 32,
+          "customer_tier": "business"
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    },
+    {
+      "request": {
+        "request_id": "approve-new-002",
+        "decision": "approve",
+        "state": {
+          "subject": "Service credit for missed SLA",
+          "body": "Monitoring confirms uptime fell below the contracted SLA and the signed agreement specifies a credit.",
+          "amount": 240,
+          "customer_tier": "enterprise"
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    },
+    {
+      "request": {
+        "request_id": "approve-new-003",
+        "decision": "approve",
+        "state": {
+          "subject": "Replacement part covered by warranty",
+          "body": "Serial number and purchase date are verified; the component failed within the stated warranty period.",
+          "amount": 86,
+          "customer_tier": "standard"
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    },
+    {
+      "request": {
+        "request_id": "approve-new-004",
+        "decision": "approve",
+        "state": {
+          "subject": "Duplicate seat license charge",
+          "body": "The billing portal confirms the same seat was charged twice in one invoice cycle.",
+          "amount": 18,
+          "customer_tier": "business"
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    },
+    {
+      "request": {
+        "request_id": "approve-new-005",
+        "decision": "approve",
+        "state": {
+          "subject": "Confirmed tax calculation error",
+          "body": "The applicable tax rate was 5 percent but the invoice applied 12 percent; finance verified the calculation.",
+          "amount": 14,
+          "customer_tier": "standard"
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    },
+    {
+      "request": {
+        "request_id": "approve-new-006",
+        "decision": "approve",
+        "state": {
+          "subject": "Cancellation fee waived by contract",
+          "body": "The signed agreement explicitly waives the cancellation fee when notice is provided 14 days ahead; notice was timely.",
+          "amount": 75,
+          "customer_tier": "enterprise"
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    },
+    {
+      "request": {
+        "request_id": "approve-new-007",
+        "decision": "approve",
+        "state": {
+          "subject": "Return received at warehouse",
+          "body": "Warehouse scan confirms receipt of the returned item and the order qualifies under the written return terms.",
+          "amount": 119,
+          "customer_tier": "standard"
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    },
+    {
+      "request": {
+        "request_id": "approve-new-008",
+        "decision": "approve",
+        "state": {
+          "subject": "Incorrect quantity charged",
+          "body": "Packing record shows one unit shipped while the customer was billed for three; audit confirms the mismatch.",
+          "amount": 44,
+          "customer_tier": "business"
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    },
+    {
+      "request": {
+        "request_id": "approve-new-009",
+        "decision": "approve",
+        "state": {
+          "subject": "Gift card already redeemed",
+          "body": "Transaction history shows the full gift-card balance was redeemed before the reported issue.",
+          "amount": 30,
+          "customer_tier": "standard"
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    },
+    {
+      "request": {
+        "request_id": "approve-new-010",
+        "decision": "approve",
+        "state": {
+          "subject": "Late cancellation without exception",
+          "body": "The booking was cancelled after the published cutoff and no exception is documented.",
+          "amount": 95,
+          "customer_tier": "standard"
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    },
+    {
+      "request": {
+        "request_id": "approve-new-011",
+        "decision": "approve",
+        "state": {
+          "subject": "Claim submitted by unrelated account",
+          "body": "The claimant cannot be matched to the purchaser or an authorized account contact.",
+          "amount": 210,
+          "customer_tier": "free"
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    },
+    {
+      "request": {
+        "request_id": "approve-new-012",
+        "decision": "approve",
+        "state": {
+          "subject": "Subscription benefit already credited",
+          "body": "The ledger confirms the requested service credit was applied to the current invoice.",
+          "amount": 22,
+          "customer_tier": "business"
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    },
+    {
+      "request": {
+        "request_id": "approve-new-013",
+        "decision": "approve",
+        "state": {
+          "subject": "Physical damage after misuse",
+          "body": "Inspection report attributes the damage to liquid exposure, which is excluded by the written warranty.",
+          "amount": 160,
+          "customer_tier": "standard"
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    },
+    {
+      "request": {
+        "request_id": "approve-new-014",
+        "decision": "approve",
+        "state": {
+          "subject": "Missing proof of purchase",
+          "body": "The customer requests reimbursement but the order reference and receipt cannot be verified.",
+          "amount": 68,
+          "customer_tier": "free"
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    },
+    {
+      "request": {
+        "request_id": "approve-new-015",
+        "decision": "approve",
+        "state": {
+          "subject": "Expired promotional guarantee",
+          "body": "The price-protection request was filed after the published 7-day period and no exception applies.",
+          "amount": 31,
+          "customer_tier": "standard"
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    },
+    {
+      "request": {
+        "request_id": "approve-new-016",
+        "decision": "approve",
+        "state": {
+          "subject": "Chargeback already in progress",
+          "body": "The payment processor confirms an active chargeback for this same transaction; duplicate reimbursement is prohibited.",
+          "amount": 105,
+          "customer_tier": "business"
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    },
+    {
+      "request": {
+        "request_id": "approve-new-017",
+        "decision": "approve",
+        "state": {
+          "subject": "Service used beyond trial terms",
+          "body": "Account records show paid features were used after the free trial ended; no billing error is recorded.",
+          "amount": 49,
+          "customer_tier": "free"
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    },
+    {
+      "request": {
+        "request_id": "approve-new-018",
+        "decision": "approve",
+        "state": {
+          "subject": "Unclear usage meter discrepancy",
+          "body": "Customer reports unusually high usage, but raw event logs and the billing export are not yet available.",
+          "amount": 72,
+          "customer_tier": "business"
+        }
+      },
+      "expected": {
+        "value": null,
+        "abstain": true
+      },
+      "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    },
+    {
+      "request": {
+        "request_id": "approve-new-019",
+        "decision": "approve",
+        "state": {
+          "subject": "Conflicting delivery evidence",
+          "body": "Customer says the parcel was absent, while the carrier's location scan is incomplete and no photo exists.",
+          "amount": 58,
+          "customer_tier": "standard"
+        }
+      },
+      "expected": {
+        "value": null,
+        "abstain": true
+      },
+      "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    },
+    {
+      "request": {
+        "request_id": "approve-new-020",
+        "decision": "approve",
+        "state": {
+          "subject": "Manager exception requested",
+          "body": "The customer asks for a goodwill exception, but no approver decision or exception criteria are supplied.",
+          "amount": 130,
+          "customer_tier": "premium"
+        }
+      },
+      "expected": {
+        "value": null,
+        "abstain": true
+      },
+      "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    },
+    {
+      "request": {
+        "request_id": "approve-new-021",
+        "decision": "approve",
+        "state": {
+          "subject": "Subscription ownership disputed",
+          "body": "Two team members claim ownership of the same workspace and the billing contact has not confirmed who may request credit.",
+          "amount": 90,
+          "customer_tier": "business"
+        }
+      },
+      "expected": {
+        "value": null,
+        "abstain": true
+      },
+      "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    },
+    {
+      "request": {
+        "request_id": "approve-new-022",
+        "decision": "approve",
+        "state": {
+          "subject": "Partial refund calculation unclear",
+          "body": "The order contains bundled items and a partial return, but the allocation rules are not included in the case.",
+          "amount": 47,
+          "customer_tier": "standard"
+        }
+      },
+      "expected": {
+        "value": null,
+        "abstain": true
+      },
+      "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    },
+    {
+      "request": {
+        "request_id": "approve-new-023",
+        "decision": "approve",
+        "state": {
+          "subject": "Potential account compromise linked to purchase",
+          "body": "A reimbursement request follows a reported account takeover; security review has not finished.",
+          "amount": 320,
+          "customer_tier": "premium"
+        }
+      },
+      "expected": {
+        "value": null,
+        "abstain": true
+      },
+      "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    },
+    {
+      "request": {
+        "request_id": "approve-new-024",
+        "decision": "approve",
+        "state": {
+          "subject": "Foreign exchange rate dispute",
+          "body": "The customer disputes the converted total, but the processor settlement rate and timestamp are missing.",
+          "amount": 23,
+          "customer_tier": "standard"
+        }
+      },
+      "expected": {
+        "value": null,
+        "abstain": true
+      },
+      "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    },
+    {
+      "request": {
+        "request_id": "approve-new-025",
+        "decision": "approve",
+        "state": {
+          "subject": "Damaged item photo inconclusive",
+          "body": "The supplied description says the device is cracked, but the inspection outcome and image quality are not recorded.",
+          "amount": 115,
+          "customer_tier": "free"
+        }
+      },
+      "expected": {
+        "value": null,
+        "abstain": true
+      },
+      "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    },
+    {
+      "request": {
+        "request_id": "approve-new-026",
+        "decision": "approve",
+        "state": {
+          "subject": "Verified unused annual add-on",
+          "body": "The add-on was not activated, cancellation occurred inside the contract's grace period, and the terms allow reversal.",
+          "amount": 64,
+          "customer_tier": "premium"
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    },
+    {
+      "request": {
+        "request_id": "approve-new-027",
+        "decision": "approve",
+        "state": {
+          "subject": "Wrong tax jurisdiction corrected",
+          "body": "Finance confirmed the invoice used the wrong jurisdiction and approved a correction under documented tax procedure.",
+          "amount": 37,
+          "customer_tier": "business"
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    },
+    {
+      "request": {
+        "request_id": "approve-new-028",
+        "decision": "approve",
+        "state": {
+          "subject": "Non-refundable setup fee",
+          "body": "The signed order form clearly identifies the setup fee as non-refundable after onboarding has begun; onboarding is complete.",
+          "amount": 150,
+          "customer_tier": "enterprise"
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    },
+    {
+      "request": {
+        "request_id": "approve-new-029",
+        "decision": "approve",
+        "state": {
+          "subject": "Courtesy credit requested after outage",
+          "body": "The customer reports a brief interruption, but incident duration and any applicable service-credit terms are unavailable.",
+          "amount": 12,
+          "customer_tier": "standard"
+        }
+      },
+      "expected": {
+        "value": null,
+        "abstain": true
+      },
+      "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    },
+    {
+      "request": {
+        "request_id": "approve-new-030",
+        "decision": "approve",
+        "state": {
+          "subject": "Potential duplicate refund across channels",
+          "body": "The support system shows a refund request and a separate marketplace claim, but their transaction linkage is unresolved.",
+          "amount": 83,
+          "customer_tier": "premium"
+        }
+      },
+      "expected": {
+        "value": null,
+        "abstain": true
+      },
+      "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    },
+    {
+      "request": {
+        "request_id": "grounded-new-001",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "You can invite up to 12 members to a workspace.",
+          "kb_article": "Each workspace supports a maximum of twelve invited members."
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    },
+    {
+      "request": {
+        "request_id": "grounded-new-002",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "You can invite 50 members on every plan.",
+          "kb_article": "Each workspace supports a maximum of twelve invited members."
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    },
+    {
+      "request": {
+        "request_id": "grounded-new-003",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "Two-factor authentication can be enabled in Security settings.",
+          "kb_article": "Open Settings, choose Security, and enable two-factor authentication."
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    },
+    {
+      "request": {
+        "request_id": "grounded-new-004",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "Two-factor authentication is mandatory for every account.",
+          "kb_article": "Two-factor authentication is an optional account security setting."
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    },
+    {
+      "request": {
+        "request_id": "grounded-new-005",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "Exported archives are available for 48 hours.",
+          "kb_article": "Generated data archives remain downloadable for 48 hours."
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    },
+    {
+      "request": {
+        "request_id": "grounded-new-006",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "Your archive will remain available for 30 days.",
+          "kb_article": "Generated data archives remain downloadable for 48 hours."
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    },
+    {
+      "request": {
+        "request_id": "grounded-new-007",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "The trial period lasts 14 days from registration.",
+          "kb_article": "New workspaces receive a 14-day trial beginning at registration."
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    },
+    {
+      "request": {
+        "request_id": "grounded-new-008",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "The trial automatically extends for another month.",
+          "kb_article": "New workspaces receive a 14-day trial beginning at registration. Extensions are not described."
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    },
+    {
+      "request": {
+        "request_id": "grounded-new-009",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "A workspace owner can restore an archived project.",
+          "kb_article": "Archived projects can be restored by workspace owners from the Archive page."
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    },
+    {
+      "request": {
+        "request_id": "grounded-new-010",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "Any member can permanently restore every deleted project.",
+          "kb_article": "Archived projects can be restored by workspace owners from the Archive page."
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    },
+    {
+      "request": {
+        "request_id": "grounded-new-011",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "The mobile app supports offline viewing of saved reports.",
+          "kb_article": "Reports marked for offline access remain viewable in the mobile app without a connection."
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    },
+    {
+      "request": {
+        "request_id": "grounded-new-012",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "All dashboard changes sync offline in real time.",
+          "kb_article": "Reports marked for offline access remain viewable in the mobile app without a connection."
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    },
+    {
+      "request": {
+        "request_id": "grounded-new-013",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "You can change the invoice recipient from Billing settings.",
+          "kb_article": "The invoice recipient email can be edited under Billing settings by an account owner."
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    },
+    {
+      "request": {
+        "request_id": "grounded-new-014",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "Any team member can change the legal billing entity.",
+          "kb_article": "Only an account owner can edit the invoice recipient email under Billing settings."
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    },
+    {
+      "request": {
+        "request_id": "grounded-new-015",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "The integration token can be regenerated from Developer settings.",
+          "kb_article": "Open Developer settings and select Regenerate token to issue a replacement integration token."
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    },
+    {
+      "request": {
+        "request_id": "grounded-new-016",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "Old integration tokens remain valid forever after regeneration.",
+          "kb_article": "Regenerating an integration token revokes the previous token."
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    },
+    {
+      "request": {
+        "request_id": "grounded-new-017",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "Deleted notifications remain in the recycle area for seven days.",
+          "kb_article": "Deleted notifications can be recovered from the recycle area for seven days."
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    },
+    {
+      "request": {
+        "request_id": "grounded-new-018",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "Deleted notifications are permanently recoverable at any time.",
+          "kb_article": "Deleted notifications can be recovered from the recycle area for seven days."
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    },
+    {
+      "request": {
+        "request_id": "grounded-new-019",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "The report scheduler supports daily and weekly delivery.",
+          "kb_article": "Scheduled reports can be sent daily or weekly by email."
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    },
+    {
+      "request": {
+        "request_id": "grounded-new-020",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "The scheduler can send reports every five minutes.",
+          "kb_article": "Scheduled reports can be sent daily or weekly by email."
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    },
+    {
+      "request": {
+        "request_id": "grounded-new-021",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "A password must contain at least 12 characters.",
+          "kb_article": "Passwords must be at least 12 characters long."
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    },
+    {
+      "request": {
+        "request_id": "grounded-new-022",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "A password can be only six characters long.",
+          "kb_article": "Passwords must be at least 12 characters long."
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    },
+    {
+      "request": {
+        "request_id": "grounded-new-023",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "The platform retains audit events for 180 days.",
+          "kb_article": "Audit events are retained for 180 days before automatic removal."
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    },
+    {
+      "request": {
+        "request_id": "grounded-new-024",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "Audit records are stored indefinitely on all plans.",
+          "kb_article": "Audit events are retained for 180 days before automatic removal."
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    },
+    {
+      "request": {
+        "request_id": "grounded-new-025",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "A CSV import accepts UTF-8 encoded files.",
+          "kb_article": "CSV uploads must use UTF-8 encoding and include a header row."
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    },
+    {
+      "request": {
+        "request_id": "grounded-new-026",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "CSV imports accept any encoding and do not need headers.",
+          "kb_article": "CSV uploads must use UTF-8 encoding and include a header row."
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    },
+    {
+      "request": {
+        "request_id": "grounded-new-027",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "The API rate limit is 60 requests per minute per token.",
+          "kb_article": "Each API token is limited to 60 requests per minute."
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    },
+    {
+      "request": {
+        "request_id": "grounded-new-028",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "The API has no rate limit for enterprise customers.",
+          "kb_article": "Each API token is limited to 60 requests per minute."
+        }
+      },
+      "expected": {
+        "value": false,
+        "abstain": false
+      },
+      "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    },
+    {
+      "request": {
+        "request_id": "grounded-new-029",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "The article does not specify whether SSO is included in the starter plan.",
+          "kb_article": "Starter plan features are listed, but single sign-on availability is not stated."
+        }
+      },
+      "expected": {
+        "value": true,
+        "abstain": false
+      },
+      "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    },
+    {
+      "request": {
+        "request_id": "grounded-new-030",
+        "decision": "grounded",
+        "state": {
+          "draft_reply": "Single sign-on is included with the starter plan.",
+          "kb_article": "Starter plan features are listed, but single sign-on availability is not stated."
+        }
+      },
+      "expected": {
+        "value": null,
+        "abstain": true
+      },
+      "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    }
+  ]
+}

@@ -6,9 +6,9 @@ Measured via `scripts/bench.py` on 500 warm sequential requests per task directl
 
 | Decision Task | Requests | p50 (ms) | p95 (ms) | p99 (ms) | Mean (ms) | Errors | Budget Status |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| **`route`** | 500 | 6.97 | **10.53** | 13.87 | 7.45 | 0 | PASS (<=25ms full marks) |
-| **`approve`** | 500 | 6.11 | **7.52** | 9.72 | 6.31 | 0 | PASS (<=25ms full marks) |
-| **`grounded`** | 500 | 6.47 | **9.43** | 11.53 | 6.86 | 0 | PASS (<=25ms full marks) |
+| **`route`** | 500 | 6.74 | **8.38** | 10.65 | 6.95 | 0 | PASS (<=25ms full marks) |
+| **`approve`** | 500 | 5.96 | **6.91** | 8.09 | 6.06 | 0 | PASS (<=25ms full marks) |
+| **`grounded`** | 500 | 7.04 | **8.48** | 12.22 | 7.26 | 0 | PASS (<=25ms full marks) |
 
 ## Benchmark Configuration
 - **Server**: `http://127.0.0.1:8000` (FastAPI + Uvicorn)
@@ -18,6 +18,6 @@ Measured via `scripts/bench.py` on 500 warm sequential requests per task directl
 
 ## Artifact Size Audit
 - **Artifacts Directory**: `C:\Users\Piyush\Downloads\CognitionNext\artifacts`
-- **Total Size**: **16.27 MB**
-- **Hard Limit**: 500 MB (Used: 3.25%)
+- **Total Size**: **26.64 MB**
+- **Hard Limit**: 500 MB (Used: 5.33%)
 - **Status**: **PASS (Well within 500MB cap)**

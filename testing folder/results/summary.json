@@ -1,0 +1,108 @@
+{
+  "dataset_name": "Decide Fresh Manual QA Dataset",
+  "version": "1.0",
+  "dataset_path": "C:\\Users\\Piyush\\Downloads\\CognitionNext\\testing folder\\decide_fresh_manual_test_dataset_100.json",
+  "total_cases": 100,
+  "total_passed": 79,
+  "total_failed": 21,
+  "overall_pass_rate": 79.0,
+  "tasks": {
+    "route": {
+      "total": 40,
+      "passed": 31,
+      "failed": 9,
+      "prediction_accuracy": 77.5,
+      "abstention_rate": 75.0,
+      "api_errors": 0,
+      "schema_errors": 0,
+      "latency": {
+        "mean_ms": 26.12,
+        "p50_ms": 28.1,
+        "p90_ms": 37.34,
+        "p95_ms": 38.59,
+        "p99_ms": 41.52,
+        "min_ms": 11.96,
+        "max_ms": 43.03
+      }
+    },
+    "approve": {
+      "total": 30,
+      "passed": 21,
+      "failed": 9,
+      "overall_pass_rate": 70.0,
+      "standard_cases": {
+        "total": 20,
+        "prediction_accuracy": 55.0,
+        "abstention_rate": 40.0
+      },
+      "ambiguous_cases": {
+        "total": 10,
+        "abstained_as_expected": 10,
+        "expected_abstention_rate": 100.0,
+        "unexpected_no_abstain_failures": 0
+      },
+      "api_errors": 0,
+      "schema_errors": 0,
+      "latency": {
+        "mean_ms": 25.43,
+        "p50_ms": 27.79,
+        "p90_ms": 33.82,
+        "p95_ms": 36.91,
+        "p99_ms": 38.36,
+        "min_ms": 10.23,
+        "max_ms": 38.53
+      }
+    },
+    "grounded": {
+      "total": 30,
+      "passed": 27,
+      "failed": 3,
+      "overall_pass_rate": 90.0,
+      "standard_cases": {
+        "total": 29,
+        "prediction_accuracy": 89.66,
+        "abstention_rate": 3.45
+      },
+      "ambiguous_cases": {
+        "total": 1,
+        "abstained_as_expected": 1,
+        "expected_abstention_rate": 100.0,
+        "unexpected_no_abstain_failures": 0
+      },
+      "api_errors": 0,
+      "schema_errors": 0,
+      "latency": {
+        "mean_ms": 25.25,
+        "p50_ms": 27.21,
+        "p90_ms": 32.32,
+        "p95_ms": 35.83,
+        "p99_ms": 36.63,
+        "min_ms": 12.07,
+        "max_ms": 36.69
+      }
+    }
+  },
+  "latency_statistics": {
+    "roundtrip": {
+      "mean_ms": 25.65,
+      "p50_ms": 27.51,
+      "p90_ms": 35.73,
+      "p95_ms": 37.91,
+      "p99_ms": 39.21,
+      "min_ms": 10.23,
+      "max_ms": 43.03
+    },
+    "server_internal": {
+      "mean_ms": 9.92,
+      "p50_ms": 9.89,
+      "p90_ms": 12.4,
+      "p95_ms": 12.74,
+      "p99_ms": 13.52,
+      "min_ms": 6.22,
+      "max_ms": 14.57
+    }
+  },
+  "failure_counts_by_type": {
+    "PREDICTION_MISMATCH": 21
+  }
+}
