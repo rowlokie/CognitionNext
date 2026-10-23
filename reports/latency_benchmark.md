@@ -6,9 +6,9 @@ Measured via `scripts/bench.py` on 500 warm sequential requests per task directl
 
 | Decision Task | Requests | p50 (ms) | p95 (ms) | p99 (ms) | Mean (ms) | Errors | Budget Status |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| **`route`** | 500 | 6.74 | **8.38** | 10.65 | 6.95 | 0 | PASS (<=25ms full marks) |
-| **`approve`** | 500 | 5.96 | **6.91** | 8.09 | 6.06 | 0 | PASS (<=25ms full marks) |
-| **`grounded`** | 500 | 7.04 | **8.48** | 12.22 | 7.26 | 0 | PASS (<=25ms full marks) |
+| **`route`** | 500 | 8.93 | **13.01** | 16.01 | 9.53 | 0 | PASS (<=25ms full marks) |
+| **`approve`** | 500 | 7.25 | **11.28** | 14.59 | 6.17 | 0 | PASS (<=25ms full marks) |
+| **`grounded`** | 500 | 9.37 | **14.42** | 17.52 | 10.12 | 0 | PASS (<=25ms full marks) |
 
 ## Benchmark Configuration
 - **Server**: `http://127.0.0.1:8000` (FastAPI + Uvicorn)

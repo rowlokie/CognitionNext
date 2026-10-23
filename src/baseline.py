@@ -799,6 +799,21 @@ class BaselineModel:
 
     def _predict_binary(self, state: dict, task: str):
         if task == "approve":
+            try:
+                from policy import ApprovalPolicyEngine
+                engine = ApprovalPolicyEngine()
+                eligible, override = engine.evaluate_policy(state)
+                if not eligible and override is not None:
+                    val = override["value"]
+                    p = override["p_true"]
+                    conf = max(p, 1 - p)
+                    ab = override["abstain"]
+                    reason = override.get("reason", "POLICY_REJECT")
+                    return val, p, conf, ab, reason
+            except Exception as e:
+                pass
+
+        if task == "approve":
             text = serialize_approve(state)
             struct = structured_approve(state)
             X = self._combine_features([text], [struct], self.shared_tfidf_word, self.shared_tfidf_char)
@@ -824,6 +839,7 @@ class BaselineModel:
         value = p_true >= thresh
         confidence = max(p_true, 1 - p_true)
         abstain = confidence < self.abstention_thresholds.get(task, 0.5)
+        reason = None
 
         # Epistemic uncertainty / incomplete evidence detection
         if task == "approve":
@@ -836,6 +852,11 @@ class BaselineModel:
             ]
             if any(pat in text_full for pat in UNCERTAINTY_PATTERNS):
                 abstain = True
+                reason = "EPISTEMIC_UNCERTAINTY_INCOMPLETE_EVIDENCE"
+            elif abstain:
+                reason = "MODEL_CONFIDENCE_BELOW_ABSTENTION_THRESHOLD"
+            else:
+                reason = "MODEL_APPROVED_ELIGIBLE" if value else "MODEL_REJECTED_ELIGIBLE"
 
         elif task == "grounded":
             art = safe_str(state.get("kb_article", "")).lower()
@@ -844,8 +865,13 @@ class BaselineModel:
             ]
             if any(gp in art for gp in GAP_PATTERNS):
                 abstain = True
+                reason = "EPISTEMIC_GAP_KB_ARTICLE"
+            elif abstain:
+                reason = "MODEL_CONFIDENCE_BELOW_ABSTENTION_THRESHOLD"
+            else:
+                reason = "MODEL_GROUNDED_CONFIRMED" if value else "MODEL_UNGROUNDED_REJECTED"
 
-        return value, p_true, confidence, abstain
+        return value, p_true, confidence, abstain, reason
 
     def predict(self, state: dict, decision: str, request_id: str = "") -> dict:
         """Main predict interface. Returns full response dict."""
@@ -865,9 +891,9 @@ class BaselineModel:
                 "latency_ms": round(latency_ms, 3),
             }
         elif decision in ("approve", "grounded"):
-            value, p_true, confidence, abstain = self._predict_binary(state, decision)
+            value, p_true, confidence, abstain, reason = self._predict_binary(state, decision)
             latency_ms = (time.perf_counter() - t0) * 1000
-            return {
+            resp = {
                 "request_id": request_id,
                 "decision": decision,
                 "type": "binary",
@@ -876,6 +902,9 @@ class BaselineModel:
                 "abstain": bool(abstain),
                 "latency_ms": round(latency_ms, 3),
             }
+            if reason:
+                resp["reason"] = reason
+            return resp
         else:
             raise ValueError(f"Unknown decision: {decision!r}. Must be one of: route, approve, grounded")
 

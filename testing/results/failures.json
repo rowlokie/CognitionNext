@@ -21,7 +21,7 @@
       },
       "confidence": 0.588774,
       "abstain": true,
-      "latency_ms": 9.664
+      "latency_ms": 7.536
     },
     "request_state": {
       "subject": "Webhook events missing",
@@ -51,7 +51,7 @@
       },
       "confidence": 0.497958,
       "abstain": true,
-      "latency_ms": 11.743
+      "latency_ms": 6.343
     },
     "request_state": {
       "subject": "CSV import rejects valid rows",
@@ -81,7 +81,7 @@
       },
       "confidence": 0.509377,
       "abstain": true,
-      "latency_ms": 11.064
+      "latency_ms": 11.708
     },
     "request_state": {
       "subject": "Merge duplicate profiles",
@@ -111,7 +111,7 @@
       },
       "confidence": 0.46932,
       "abstain": true,
-      "latency_ms": 12.105
+      "latency_ms": 11.558
     },
     "request_state": {
       "subject": "Transfer workspace ownership",
@@ -141,7 +141,7 @@
       },
       "confidence": 0.738107,
       "abstain": false,
-      "latency_ms": 11.718
+      "latency_ms": 5.952
     },
     "request_state": {
       "subject": "Customs clearance delay",
@@ -171,7 +171,7 @@
       },
       "confidence": 0.398338,
       "abstain": true,
-      "latency_ms": 10.648
+      "latency_ms": 6.586
     },
     "request_state": {
       "subject": "Locker pickup code missing",
@@ -201,7 +201,7 @@
       },
       "confidence": 0.547797,
       "abstain": true,
-      "latency_ms": 8.281
+      "latency_ms": 10.854
     },
     "request_state": {
       "subject": "Packaging size restriction",
@@ -231,7 +231,7 @@
       },
       "confidence": 0.456311,
       "abstain": true,
-      "latency_ms": 7.354
+      "latency_ms": 10.193
     },
     "request_state": {
       "subject": "Accessibility statement location",
@@ -261,7 +261,7 @@
       },
       "confidence": 0.552061,
       "abstain": true,
-      "latency_ms": 8.46
+      "latency_ms": 6.577
     },
     "request_state": {
       "subject": "Newsletter subscription",
@@ -285,7 +285,8 @@
       "value": false,
       "p_true": 0.480879,
       "abstain": true,
-      "latency_ms": 8.701
+      "latency_ms": 5.871,
+      "reason": "MODEL_CONFIDENCE_BELOW_ABSTENTION_THRESHOLD"
     },
     "request_state": {
       "subject": "Metered usage overcharge verified",
@@ -311,7 +312,8 @@
       "value": false,
       "p_true": 0.268239,
       "abstain": true,
-      "latency_ms": 7.973
+      "latency_ms": 6.613,
+      "reason": "MODEL_CONFIDENCE_BELOW_ABSTENTION_THRESHOLD"
     },
     "request_state": {
       "subject": "Service credit for missed SLA",
@@ -325,7 +327,7 @@
     "request_id": "approve-new-003",
     "task": "approve",
     "failure_type": "PREDICTION_MISMATCH",
-    "failure_detail": "Predicted False, expected True (p_true=0.2805, abstain=True)",
+    "failure_detail": "Predicted False, expected True (p_true=0.0500, abstain=False)",
     "expected": {
       "value": true,
       "abstain": false
@@ -335,9 +337,10 @@
       "decision": "approve",
       "type": "binary",
       "value": false,
-      "p_true": 0.280548,
-      "abstain": true,
-      "latency_ms": 7.049
+      "p_true": 0.05,
+      "abstain": false,
+      "latency_ms": 0.038,
+      "reason": "POLICY_REJECT_FREE_TIER_LIMIT_EXCEEDED"
     },
     "request_state": {
       "subject": "Replacement part covered by warranty",
@@ -351,7 +354,7 @@
     "request_id": "approve-new-007",
     "task": "approve",
     "failure_type": "PREDICTION_MISMATCH",
-    "failure_detail": "Predicted False, expected True (p_true=0.0575, abstain=False)",
+    "failure_detail": "Predicted False, expected True (p_true=0.0500, abstain=False)",
     "expected": {
       "value": true,
       "abstain": false
@@ -361,67 +364,16 @@
       "decision": "approve",
       "type": "binary",
       "value": false,
-      "p_true": 0.057521,
+      "p_true": 0.05,
       "abstain": false,
-      "latency_ms": 11.1
+      "latency_ms": 0.061,
+      "reason": "POLICY_REJECT_FREE_TIER_LIMIT_EXCEEDED"
     },
     "request_state": {
       "subject": "Return received at warehouse",
       "body": "Warehouse scan confirms receipt of the returned item and the order qualifies under the written return terms.",
       "amount": 119,
       "customer_tier": "standard"
-    },
-    "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
-  },
-  {
-    "request_id": "approve-new-009",
-    "task": "approve",
-    "failure_type": "PREDICTION_MISMATCH",
-    "failure_detail": "Predicted True, expected False (p_true=0.7853, abstain=False)",
-    "expected": {
-      "value": false,
-      "abstain": false
-    },
-    "actual": {
-      "request_id": "approve-new-009",
-      "decision": "approve",
-      "type": "binary",
-      "value": true,
-      "p_true": 0.785349,
-      "abstain": false,
-      "latency_ms": 8.018
-    },
-    "request_state": {
-      "subject": "Gift card already redeemed",
-      "body": "Transaction history shows the full gift-card balance was redeemed before the reported issue.",
-      "amount": 30,
-      "customer_tier": "standard"
-    },
-    "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
-  },
-  {
-    "request_id": "approve-new-012",
-    "task": "approve",
-    "failure_type": "PREDICTION_MISMATCH",
-    "failure_detail": "Predicted True, expected False (p_true=0.7675, abstain=False)",
-    "expected": {
-      "value": false,
-      "abstain": false
-    },
-    "actual": {
-      "request_id": "approve-new-012",
-      "decision": "approve",
-      "type": "binary",
-      "value": true,
-      "p_true": 0.767526,
-      "abstain": false,
-      "latency_ms": 9.258
-    },
-    "request_state": {
-      "subject": "Subscription benefit already credited",
-      "body": "The ledger confirms the requested service credit was applied to the current invoice.",
-      "amount": 22,
-      "customer_tier": "business"
     },
     "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
   },
@@ -441,7 +393,8 @@
       "value": false,
       "p_true": 0.511607,
       "abstain": true,
-      "latency_ms": 8.324
+      "latency_ms": 5.287,
+      "reason": "MODEL_CONFIDENCE_BELOW_ABSTENTION_THRESHOLD"
     },
     "request_state": {
       "subject": "Verified unused annual add-on",
@@ -467,39 +420,14 @@
       "value": false,
       "p_true": 0.692928,
       "abstain": true,
-      "latency_ms": 10.095
+      "latency_ms": 5.19,
+      "reason": "MODEL_CONFIDENCE_BELOW_ABSTENTION_THRESHOLD"
     },
     "request_state": {
       "subject": "Wrong tax jurisdiction corrected",
       "body": "Finance confirmed the invoice used the wrong jurisdiction and approved a correction under documented tax procedure.",
       "amount": 37,
       "customer_tier": "business"
-    },
-    "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
-  },
-  {
-    "request_id": "approve-new-028",
-    "task": "approve",
-    "failure_type": "PREDICTION_MISMATCH",
-    "failure_detail": "Predicted True, expected False (p_true=0.7594, abstain=True)",
-    "expected": {
-      "value": false,
-      "abstain": false
-    },
-    "actual": {
-      "request_id": "approve-new-028",
-      "decision": "approve",
-      "type": "binary",
-      "value": true,
-      "p_true": 0.759356,
-      "abstain": true,
-      "latency_ms": 8.697
-    },
-    "request_state": {
-      "subject": "Non-refundable setup fee",
-      "body": "The signed order form clearly identifies the setup fee as non-refundable after onboarding has begun; onboarding is complete.",
-      "amount": 150,
-      "customer_tier": "enterprise"
     },
     "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
   },
@@ -519,7 +447,8 @@
       "value": true,
       "p_true": 0.902149,
       "abstain": false,
-      "latency_ms": 9.951
+      "latency_ms": 10.197,
+      "reason": "MODEL_GROUNDED_CONFIRMED"
     },
     "request_state": {
       "draft_reply": "Two-factor authentication is mandatory for every account.",
@@ -543,7 +472,8 @@
       "value": false,
       "p_true": 0.247386,
       "abstain": false,
-      "latency_ms": 10.25
+      "latency_ms": 6.541,
+      "reason": "MODEL_UNGROUNDED_REJECTED"
     },
     "request_state": {
       "draft_reply": "A workspace owner can restore an archived project.",
@@ -567,7 +497,8 @@
       "value": false,
       "p_true": 0.392781,
       "abstain": false,
-      "latency_ms": 10.597
+      "latency_ms": 8.88,
+      "reason": "MODEL_UNGROUNDED_REJECTED"
     },
     "request_state": {
       "draft_reply": "The report scheduler supports daily and weekly delivery.",

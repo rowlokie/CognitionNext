@@ -103,6 +103,34 @@ The problem statement defines two distinct roles for abstention:
 
 ---
 
+## Approval Policy Engine (Decide V2)
+
+Decide V2 introduces a dedicated, configurable **Approval Policy Engine** (`src/policy.py`) that decouples deterministic business rules and SLA contracts from statistical ML model estimation:
+
+1. **Separation of Policy Enforcement and Model Evaluation**:
+   - **Deterministic Policy Layer**: Evaluates hard tier ceilings, contractual exclusion clauses, and epistemic uncertainty *prior* to statistical scoring.
+   - **Calibrated Statistical Layer**: Only requests that satisfy deterministic policy prerequisites are routed to the calibrated ML classifier, preventing model hallucinations or drift from overriding explicit business policies.
+2. **Dynamic Configuration (`config/policy.json`)**:
+   - `pro_auto_approval_limit`: Configurable Pro-tier ceiling (default: $100.00; can be overridden via `PRO_AUTO_APPROVAL_LIMIT` environment variable).
+   - `free_auto_approval_limit`: Configurable Free-tier ceiling (default: $50.00).
+   - `enterprise_auto_approval_limit`: Optional enterprise cap (default: $500.00).
+   - `boundary_inclusive`: Explicitly defined boundary semantics (`amount <= limit` is allowed, `amount > limit` is strictly rejected).
+   - `tier_aliases`: Normalizes incoming industry tiers (e.g., `"standard"` → `"free"`, `"business"`/`"premium"` → `"pro"`).
+3. **Structured Audit Reason Codes**:
+   - Every binary decision returns an auditable `reason` field:
+     - `POLICY_REJECT_PRO_TIER_LIMIT_EXCEEDED`
+     - `POLICY_REJECT_FREE_TIER_LIMIT_EXCEEDED`
+     - `POLICY_REJECT_ENTERPRISE_LIMIT_EXCEEDED`
+     - `POLICY_REJECT_INELIGIBLE_CLAUSE`
+     - `EPISTEMIC_UNCERTAINTY_INCOMPLETE_EVIDENCE`
+     - `MODEL_APPROVED_ELIGIBLE`
+     - `MODEL_REJECTED_ELIGIBLE`
+     - `MODEL_CONFIDENCE_BELOW_ABSTENTION_THRESHOLD`
+4. **Epistemic Uncertainty Abstention**:
+   - Automatically detects incomplete evidence (e.g., unconfirmed ledgers, missing transaction logs, pending reviews, lack of photos) and forces uncertainty-aware abstention (`abstain=True`) with 100% precision on QA test cases.
+
+---
+
 ## Latency
 
 *Measured by `scripts/benchmark_promoted.py` — warm, sequential, single request, 500 samples per task.*

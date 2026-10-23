@@ -133,6 +133,14 @@ def load_model():
             except Exception as te:
                 print(f"[startup] Warning loading thresholds: {te}")
 
+        # Reload policy config if available
+        try:
+            from policy import policy_config
+            policy_config.reload()
+            print("[startup] Reloaded approval policy config")
+        except Exception as pe:
+            print(f"[startup] Warning loading policy config: {pe}")
+
         print(f"[startup] Loaded Phase 1 baseline model from {baseline_path}")
         return
 

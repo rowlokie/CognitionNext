@@ -1,32 +1,32 @@
 {
   "latency": {
     "route": {
-      "p50_ms": 6.739,
-      "p95_ms": 8.377,
-      "p99_ms": 10.649,
-      "mean_ms": 6.952,
-      "min_ms": 5.969,
-      "max_ms": 16.691,
+      "p50_ms": 8.934,
+      "p95_ms": 13.013,
+      "p99_ms": 16.014,
+      "mean_ms": 9.527,
+      "min_ms": 7.707,
+      "max_ms": 25.9,
       "n_requests": 500,
       "n_errors": 0
     },
     "approve": {
-      "p50_ms": 5.957,
-      "p95_ms": 6.914,
-      "p99_ms": 8.087,
-      "mean_ms": 6.058,
-      "min_ms": 5.28,
-      "max_ms": 12.194,
+      "p50_ms": 7.248,
+      "p95_ms": 11.275,
+      "p99_ms": 14.585,
+      "mean_ms": 6.175,
+      "min_ms": 1.516,
+      "max_ms": 17.278,
       "n_requests": 500,
       "n_errors": 0
     },
     "grounded": {
-      "p50_ms": 7.041,
-      "p95_ms": 8.481,
-      "p99_ms": 12.219,
-      "mean_ms": 7.259,
-      "min_ms": 6.208,
-      "max_ms": 16.877,
+      "p50_ms": 9.372,
+      "p95_ms": 14.424,
+      "p99_ms": 17.524,
+      "mean_ms": 10.124,
+      "min_ms": 7.967,
+      "max_ms": 21.085,
       "n_requests": 500,
       "n_errors": 0
     },
@@ -76,5 +76,26 @@
     "feature_set": "gated_numeric_contradiction_v3",
     "user_test_cases_pass": "9/9 (100%)"
   },
-  "model_version": "grounded_v2_enriched_features"
+  "approval_policy_v2": {
+    "engine": "ApprovalPolicyEngine",
+    "pro_auto_approval_limit": 100.0,
+    "free_auto_approval_limit": 50.0,
+    "enterprise_auto_approval_limit": 500.0,
+    "boundary_inclusive": true,
+    "enforce_tier_limits": true,
+    "reason_codes": [
+      "POLICY_REJECT_PRO_TIER_LIMIT_EXCEEDED",
+      "POLICY_REJECT_FREE_TIER_LIMIT_EXCEEDED",
+      "POLICY_REJECT_ENTERPRISE_LIMIT_EXCEEDED",
+      "POLICY_REJECT_INELIGIBLE_CLAUSE",
+      "EPISTEMIC_UNCERTAINTY_INCOMPLETE_EVIDENCE",
+      "MODEL_APPROVED_ELIGIBLE",
+      "MODEL_REJECTED_ELIGIBLE",
+      "MODEL_CONFIDENCE_BELOW_ABSTENTION_THRESHOLD"
+    ],
+    "fresh_100_qa_pass_rate": "82/100 (82.0%)",
+    "ambiguous_approval_abstention_rate": "10/10 (100.0%)",
+    "unit_tests_pass": "19/19 (100%)"
+  },
+  "model_version": "decide_v2_policy_engine"
 }

@@ -1,0 +1,22 @@
+{
+  "pro_auto_approval_limit": 100.0,
+  "free_auto_approval_limit": 50.0,
+  "enterprise_auto_approval_limit": 500.0,
+  "boundary_inclusive": true,
+  "enforce_tier_limits": true,
+  "tier_aliases": {
+    "standard": "free",
+    "starter": "free",
+    "basic": "free",
+    "pro": "pro",
+    "business": "pro",
+    "premium": "pro",
+    "enterprise": "enterprise"
+  },
+  "ineligible_clauses": [
+    "non-refundable",
+    "nonrefundable",
+    "already redeemed",
+    "already credited"
+  ]
+}
