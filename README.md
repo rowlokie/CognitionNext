@@ -203,26 +203,37 @@ make calibrate
 | orjson | 3.13.0 |
 | pydantic | 2.14.1 |
 
-## Artifact Size
+## Artifact Size & Audit
 
-- `artifacts/baseline_model.pkl`: **5.32 MB** (compact multi-task representation backbone)
+- `artifacts/baseline_model.pkl`: **7.69 MB** (compact multi-task representation backbone)
 - `artifacts/thresholds.json`: **<1 KB** (calibrated decision and abstention thresholds)
-- Total production footprint: **5.32 MB** (well below the 500 MB hackathon limit)
+- `artifacts/policy.json`: **<1 KB** (configurable approval policy thresholds)
+- Total production footprint: **~7.7 MB** (only 1.5% of the 500 MB hackathon limit)
+
+## Approval Policy Engine (Decide V2)
+
+Decide V2 introduces a dedicated, configurable **Approval Policy Engine** (`src/policy.py`) that separates deterministic business rules and SLA contracts from statistical ML model estimation:
+- **Configurable Limits**: Default Pro auto-approval limit at $100.00 (`config/policy.json`), dynamically overridable via environment variables.
+- **Explicit Boundary Behavior**: Boundary inclusive semantics (`amount <= limit` allowed, `amount > limit` strictly rejected).
+- **Epistemic Uncertainty Abstention**: Detects incomplete / unverified evidence and triggers deliberate abstention.
+- **Strict Public API Schema**: Responses strictly conform to the 7-field binary and 8-field choice specifications with 0 extra keys.
 
 ## Project Layout
 
 ```
 app/          FastAPI application (main.py)
-src/          Model code (baseline.py, encoder_model.py)
-scripts/      Phase scripts (audit, calibration, bench)
-tests/        Schema and API tests
-artifacts/    Trained model artifacts (gitignored)
-data/         train.jsonl, dev.jsonl (gitignored)
-docs/         audit.md
-results.json  Benchmark results
-model_card.md Model documentation
+src/          Model code (baseline.py, policy.py, encoder_model.py)
+scripts/      Phase scripts (audit, calibration, bench, eval)
+tests/        Schema, error, inference, and policy boundary tests
+artifacts/    Trained model artifacts (<27 MB total)
+config/       Policy configuration (policy.json)
+data/         train.jsonl, dev.jsonl
+docs/         Playbook and audit documentation
+reports/      Benchmark and evaluation reports
+results.json  Measured benchmark results
+model_card.md Model card documentation
 selfcheck.py  Schema validation tool
 demo_examples.json  Example requests
-Makefile      All commands
+Makefile      All single-command entry points
 requirements.txt  Pinned dependencies
 ```

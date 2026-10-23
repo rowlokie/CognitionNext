@@ -186,7 +186,30 @@ async def decide(request: DecideRequest):
             content={"detail": str(e)}
         )
 
-    return ORJSONResponse(content=result)
+    # Strictly adhere to judging schema: exactly the required fields, no extra keys
+    if request.decision == "route":
+        public_resp = {
+            "request_id": str(result.get("request_id", request.request_id)),
+            "decision": "route",
+            "type": "choice",
+            "value": str(result.get("value", "general")),
+            "probs": result.get("probs", {}),
+            "confidence": float(result.get("confidence", 0.0)),
+            "abstain": bool(result.get("abstain", False)),
+            "latency_ms": float(result.get("latency_ms", 0.0)),
+        }
+    else:  # approve, grounded
+        public_resp = {
+            "request_id": str(result.get("request_id", request.request_id)),
+            "decision": request.decision,
+            "type": "binary",
+            "value": bool(result.get("value", False)),
+            "p_true": float(result.get("p_true", 0.0)),
+            "abstain": bool(result.get("abstain", False)),
+            "latency_ms": float(result.get("latency_ms", 0.0)),
+        }
+
+    return ORJSONResponse(content=public_resp)
 
 
 @app.get("/health")

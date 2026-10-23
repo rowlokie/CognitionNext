@@ -25,6 +25,7 @@ test:
 	python tests/test_schema.py
 	python tests/test_inference.py
 	python tests/test_errors.py
+	python tests/test_policy_boundaries.py
 
 # Run self-check (server must be running)
 selfcheck:
