@@ -161,116 +161,110 @@ make selfcheck
 make bench
 ```
 
-## How to Run & Test Your Own Custom Data
+## Step-by-Step Examiner Guide: Running & Testing on Local Machine
 
-### 1. Start the Server (Single Command)
-Ensure the local service is running on port 8000:
+### Step 1: Clone the Repository
+On your terminal (Linux, macOS, or Windows):
+```bash
+git clone https://github.com/rowlokie/CognitionNext.git
+cd CognitionNext
+```
+
+### Step 2: Install Dependencies
+In a clean Python 3.10+ environment:
+```bash
+pip install -r requirements.txt
+```
+*(Takes under 30 seconds. No heavy PyTorch, GPU drivers, or CUDA packages required).*
+
+### Step 3: Start the Service (Single Startup Command)
+The examiner starts the local inference server on port 8000:
 ```bash
 python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 1
-# or:
-make serve
+# (Or simply: make serve)
 ```
+- The server loads the trained multi-task model from `artifacts/baseline_model.pkl` in **~0.3 seconds**.
+- No downloads or network calls occur. It is 100% offline.
 
-### 2. Method A: Interactive CLI (Fastest for Manual Testing)
-Test individual tickets interactively without writing JSON by hand:
+### Step 4: How the Examiner Tests Their Own Data
+The examiner has four easy ways to feed their data:
+
+#### Option A: Automated Batch Test Runner (Most Common for Judges)
+If the examiner has a JSON file containing their test dataset (`examiner_data.json`):
 ```bash
-python scripts/interactive_cli.py
+python testing/run_tests.py path/to/examiner_data.json
 ```
-This lets you pick `route`, `approve`, or `grounded`, enter custom ticket subjects, bodies, customer tiers, refund amounts, draft replies, and KB articles, and prints the full validated response.
+**What it does automatically:**
+- Sends each request sequentially over HTTP to `POST /v1/decide`.
+- Verifies strict schema compliance, required fields, and probability ranges.
+- Evaluates predictions and computes macro-F1, pass rates, and abstention behavior.
+- Generates an immediate console report and saves `summary.json` and `results.csv`.
 
-### 3. Method B: Batch-Test Your Own JSON Dataset
-To evaluate a batch of your own test cases with automated pass/fail scoring, schema checks, and confusion breakdown:
+#### Option B: Automated Scoring via the Official Competition Schema Validator
+The examiner can point the official `selfcheck.py` to their file:
 ```bash
-python testing/run_tests.py path/to/your_dataset.json
+python selfcheck.py --file path/to/examiner_examples.json
 ```
-Your JSON dataset should contain an array of test cases formatted as follows:
-```json
-[
-  {
-    "request_id": "custom-001",
-    "decision": "approve",
-    "state": {
-      "subject": "Discrepancy in invoice",
-      "body": "Billed twice for seat renewal.",
-      "customer_tier": "pro",
-      "amount": 35.0
-    },
-    "expected": {
-      "value": true,
-      "abstain": false
-    }
-  }
-]
-```
-The test runner will automatically:
-- Send every request sequentially over HTTP to `POST /v1/decide`
-- Validate schema compliance, required fields, and probability ranges
-- Compare predictions against your expected labels
-- Save structured reports to `testing/results/summary.json` and `results.csv`
+Validates that every output conforms strictly to the judging schema without any forbidden extra keys.
 
-### 4. Method C: Send Direct HTTP Requests (cURL / Python)
-You can query the live API with any custom JSON payload:
+#### Option C: Standard HTTP POST (`POST /v1/decide`)
+If the examiner uses their own automated judge script, curl, or Postman, they send standard requests to: `http://127.0.0.1:8000/v1/decide`
 
-**cURL Example**:
+**Example cURL**:
 ```bash
 curl -X POST http://127.0.0.1:8000/v1/decide \
   -H "Content-Type: application/json" \
   -d '{
-    "request_id": "my-ticket-1",
+    "request_id": "test-judge-01",
     "decision": "approve",
     "state": {
-      "subject": "Late delivery refund",
-      "body": "Package arrived 2 weeks late.",
+      "subject": "Refund dispute",
+      "body": "Customer overcharged by $20 due to billing error.",
       "customer_tier": "pro",
-      "amount": 29.99
+      "amount": 20.0
     }
   }'
 ```
 
-**Python Script Example**:
-```python
-import requests
-
-resp = requests.post("http://127.0.0.1:8000/v1/decide", json={
-    "request_id": "custom-test-01",
-    "decision": "grounded",
-    "state": {
-      "subject": "Warranty inquiry",
-      "body": "Does this cover water damage?",
-      "customer_tier": "enterprise",
-      "amount": 0.0,
-      "draft_reply": "Water damage is covered under the standard warranty.",
-      "kb_article": "Standard warranty covers defects in materials but explicitly excludes water damage."
-    }
-})
-
-print(resp.status_code, resp.json())
+**Strict Output Received**:
+```json
+{
+  "request_id": "test-judge-01",
+  "decision": "approve",
+  "type": "binary",
+  "value": true,
+  "p_true": 0.884120,
+  "abstain": false,
+  "latency_ms": 11.23
+}
 ```
 
-### 5. Method D: Schema Self-Check with Custom Examples File
-Validate schema compliance of your own JSON test file:
-```bash
-python selfcheck.py --file path/to/your_examples.json
-```
-
-### 6. Method E: Direct Offline Python Testing (No HTTP Server Needed)
-You can import and query the trained multi-task model directly in Python without starting the web server:
+#### Option D: Direct Offline Python Evaluation (No Server Needed)
+If the examiner wants to test the model directly in Python without spinning up a web server:
 ```python
 import sys
 sys.path.insert(0, "src")
 import pickle
 
+# 1. Load the model
 with open("artifacts/baseline_model.pkl", "rb") as f:
     model = pickle.load(f)
 
-result = model.predict({
-    "subject": "Invoice overcharge",
-    "body": "I was double charged.",
+# 2. Query any decision (route, approve, or grounded)
+ticket = {
+    "subject": "Package damaged on delivery",
+    "body": "The box arrived crushed and torn.",
     "customer_tier": "pro",
-    "amount": 50.0
-}, decision="route", request_id="offline-01")
-
+    "amount": 45.0
+}
+result = model.predict(ticket, decision="route", request_id="eval-01")
 print(result)
+# Output: {'request_id': 'eval-01', 'decision': 'route', 'type': 'choice', 'value': 'shipping', ...}
+```
+
+#### Option E: Interactive CLI Tester
+```bash
+python scripts/interactive_cli.py
 ```
 
 ## Phase 2 Encoder (Optional — CPU, requires ~500MB download)
