@@ -2,3 +2,10 @@ __pycache__/
 *.pyc
 .pytest_cache/
 backups/
+
+# Local testing and scratch docs
+testing folder/
+docs/Decide_Hackathon_Implementation_Playbook.docx
+docs/extracted_playbook.txt
+docs/playbook.md
+

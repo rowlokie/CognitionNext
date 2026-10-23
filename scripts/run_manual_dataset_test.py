@@ -26,11 +26,11 @@ import requests
 ROOT = Path(__file__).parent.parent
 DEFAULT_API_URL = "http://127.0.0.1:8000/v1/decide"
 
-DEFAULT_DATASET_PATH = ROOT / "testing folder" / "decide_fresh_manual_test_dataset_100.json"
+DEFAULT_DATASET_PATH = ROOT / "testing" / "decide_fresh_manual_test_dataset_100.json"
 if not DEFAULT_DATASET_PATH.exists():
-    DEFAULT_DATASET_PATH = ROOT / "testing" / "decide_fresh_manual_test_dataset_100.json"
+    DEFAULT_DATASET_PATH = ROOT / "testing" / "decide_manual_test_dataset_100.json"
 if not DEFAULT_DATASET_PATH.exists():
-    DEFAULT_DATASET_PATH = ROOT / "testing folder" / "decide_manual_test_dataset_100.json"
+    DEFAULT_DATASET_PATH = ROOT / "testing folder" / "decide_fresh_manual_test_dataset_100.json"
 
 RESULTS_DIR = ROOT / "testing" / "results"
 ALT_RESULTS_DIR = ROOT / "testing folder" / "results"

@@ -26,11 +26,11 @@ import requests
 ROOT = Path(__file__).parent.parent
 DEFAULT_API_URL = "http://127.0.0.1:8000/v1/decide"
 
-DEFAULT_DATASET_PATH = ROOT / "testing folder" / "decide_fresh_manual_test_dataset_100.json"
+DEFAULT_DATASET_PATH = ROOT / "testing" / "decide_fresh_manual_test_dataset_100.json"
 if not DEFAULT_DATASET_PATH.exists():
-    DEFAULT_DATASET_PATH = ROOT / "testing" / "decide_fresh_manual_test_dataset_100.json"
+    DEFAULT_DATASET_PATH = ROOT / "testing" / "decide_manual_test_dataset_100.json"
 if not DEFAULT_DATASET_PATH.exists():
-    DEFAULT_DATASET_PATH = ROOT / "testing folder" / "decide_manual_test_dataset_100.json"
+    DEFAULT_DATASET_PATH = ROOT / "testing folder" / "decide_fresh_manual_test_dataset_100.json"
 
 RESULTS_DIR = ROOT / "testing" / "results"
 ALT_RESULTS_DIR = ROOT / "testing folder" / "results"
@@ -423,8 +423,10 @@ def run_tests(dataset_path=DEFAULT_DATASET_PATH, api_url=DEFAULT_API_URL):
         summary_data["failure_counts_by_type"][f["failure_type"]] += 1
     summary_data["failure_counts_by_type"] = dict(summary_data["failure_counts_by_type"])
 
-    # Write files to testing/results/ and testing folder/results/
+    # Write files to testing/results/ (and testing folder/results/ if exists)
     for out_dir in (RESULTS_DIR, ALT_RESULTS_DIR):
+        if not out_dir.exists():
+            continue
         with open(out_dir / "summary.json", "w", encoding="utf-8") as f:
             json.dump(summary_data, f, indent=2)
 
