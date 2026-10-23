@@ -1,0 +1,39 @@
+{
+  "latency": {
+    "route": {
+      "p50_ms": 7.048,
+      "p95_ms": 9.397,
+      "p99_ms": 12.069,
+      "mean_ms": 7.399,
+      "min_ms": 6.095,
+      "max_ms": 16.487,
+      "n_requests": 500,
+      "n_errors": 0
+    },
+    "approve": {
+      "p50_ms": 6.114,
+      "p95_ms": 7.627,
+      "p99_ms": 10.028,
+      "mean_ms": 6.333,
+      "min_ms": 5.387,
+      "max_ms": 15.729,
+      "n_requests": 500,
+      "n_errors": 0
+    },
+    "grounded": {
+      "p50_ms": 6.517,
+      "p95_ms": 9.881,
+      "p99_ms": 14.098,
+      "mean_ms": 7.105,
+      "min_ms": 5.54,
+      "max_ms": 15.476,
+      "n_requests": 500,
+      "n_errors": 0
+    },
+    "benchmark_config": {
+      "n_samples": 500,
+      "mode": "warm_sequential_single",
+      "server": "http://127.0.0.1:8000"
+    }
+  }
+}
