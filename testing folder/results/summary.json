@@ -16,13 +16,13 @@
       "api_errors": 0,
       "schema_errors": 0,
       "latency": {
-        "mean_ms": 23.91,
-        "p50_ms": 25.86,
-        "p90_ms": 34.74,
-        "p95_ms": 35.58,
-        "p99_ms": 36.86,
-        "min_ms": 8.93,
-        "max_ms": 37.0
+        "mean_ms": 24.07,
+        "p50_ms": 22.37,
+        "p90_ms": 33.47,
+        "p95_ms": 37.44,
+        "p99_ms": 42.26,
+        "min_ms": 10.46,
+        "max_ms": 43.69
       }
     },
     "approve": {
@@ -44,13 +44,13 @@
       "api_errors": 0,
       "schema_errors": 0,
       "latency": {
-        "mean_ms": 17.84,
-        "p50_ms": 18.88,
-        "p90_ms": 27.73,
-        "p95_ms": 29.05,
-        "p99_ms": 32.98,
-        "min_ms": 3.94,
-        "max_ms": 34.4
+        "mean_ms": 15.53,
+        "p50_ms": 13.97,
+        "p90_ms": 29.82,
+        "p95_ms": 31.2,
+        "p99_ms": 41.08,
+        "min_ms": 2.24,
+        "max_ms": 44.84
       }
     },
     "grounded": {
@@ -72,34 +72,34 @@
       "api_errors": 0,
       "schema_errors": 0,
       "latency": {
-        "mean_ms": 21.64,
-        "p50_ms": 23.43,
-        "p90_ms": 31.62,
-        "p95_ms": 33.62,
-        "p99_ms": 35.83,
-        "min_ms": 9.22,
-        "max_ms": 36.15
+        "mean_ms": 41.81,
+        "p50_ms": 41.31,
+        "p90_ms": 56.66,
+        "p95_ms": 59.93,
+        "p99_ms": 76.09,
+        "min_ms": 12.11,
+        "max_ms": 82.27
       }
     }
   },
   "latency_statistics": {
     "roundtrip": {
-      "mean_ms": 21.41,
-      "p50_ms": 23.63,
-      "p90_ms": 32.68,
-      "p95_ms": 34.76,
-      "p99_ms": 36.66,
-      "min_ms": 3.94,
-      "max_ms": 37.0
+      "mean_ms": 26.83,
+      "p50_ms": 27.66,
+      "p90_ms": 49.58,
+      "p95_ms": 50.83,
+      "p99_ms": 61.17,
+      "min_ms": 2.24,
+      "max_ms": 82.27
     },
     "server_internal": {
-      "mean_ms": 6.97,
-      "p50_ms": 7.28,
-      "p90_ms": 10.51,
-      "p95_ms": 11.49,
-      "p99_ms": 13.9,
+      "mean_ms": 14.21,
+      "p50_ms": 10.61,
+      "p90_ms": 31.0,
+      "p95_ms": 36.42,
+      "p99_ms": 51.38,
       "min_ms": 0.02,
-      "max_ms": 20.06
+      "max_ms": 73.3
     }
   },
   "failure_counts_by_type": {

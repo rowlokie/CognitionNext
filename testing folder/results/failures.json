@@ -21,7 +21,7 @@
       },
       "confidence": 0.588774,
       "abstain": true,
-      "latency_ms": 7.536
+      "latency_ms": 11.563
     },
     "request_state": {
       "subject": "Webhook events missing",
@@ -51,7 +51,7 @@
       },
       "confidence": 0.497958,
       "abstain": true,
-      "latency_ms": 6.343
+      "latency_ms": 10.759
     },
     "request_state": {
       "subject": "CSV import rejects valid rows",
@@ -81,7 +81,7 @@
       },
       "confidence": 0.509377,
       "abstain": true,
-      "latency_ms": 11.708
+      "latency_ms": 14.481
     },
     "request_state": {
       "subject": "Merge duplicate profiles",
@@ -111,7 +111,7 @@
       },
       "confidence": 0.46932,
       "abstain": true,
-      "latency_ms": 11.558
+      "latency_ms": 14.964
     },
     "request_state": {
       "subject": "Transfer workspace ownership",
@@ -141,7 +141,7 @@
       },
       "confidence": 0.738107,
       "abstain": false,
-      "latency_ms": 5.952
+      "latency_ms": 15.695
     },
     "request_state": {
       "subject": "Customs clearance delay",
@@ -171,7 +171,7 @@
       },
       "confidence": 0.398338,
       "abstain": true,
-      "latency_ms": 6.586
+      "latency_ms": 10.416
     },
     "request_state": {
       "subject": "Locker pickup code missing",
@@ -201,7 +201,7 @@
       },
       "confidence": 0.547797,
       "abstain": true,
-      "latency_ms": 10.854
+      "latency_ms": 15.464
     },
     "request_state": {
       "subject": "Packaging size restriction",
@@ -231,7 +231,7 @@
       },
       "confidence": 0.456311,
       "abstain": true,
-      "latency_ms": 10.193
+      "latency_ms": 10.537
     },
     "request_state": {
       "subject": "Accessibility statement location",
@@ -261,7 +261,7 @@
       },
       "confidence": 0.552061,
       "abstain": true,
-      "latency_ms": 6.577
+      "latency_ms": 8.404
     },
     "request_state": {
       "subject": "Newsletter subscription",
@@ -285,7 +285,7 @@
       "value": false,
       "p_true": 0.480879,
       "abstain": true,
-      "latency_ms": 5.871,
+      "latency_ms": 6.625,
       "reason": "MODEL_CONFIDENCE_BELOW_ABSTENTION_THRESHOLD"
     },
     "request_state": {
@@ -312,7 +312,7 @@
       "value": false,
       "p_true": 0.268239,
       "abstain": true,
-      "latency_ms": 6.613,
+      "latency_ms": 5.912,
       "reason": "MODEL_CONFIDENCE_BELOW_ABSTENTION_THRESHOLD"
     },
     "request_state": {
@@ -339,7 +339,7 @@
       "value": false,
       "p_true": 0.05,
       "abstain": false,
-      "latency_ms": 0.038,
+      "latency_ms": 0.041,
       "reason": "POLICY_REJECT_FREE_TIER_LIMIT_EXCEEDED"
     },
     "request_state": {
@@ -366,7 +366,7 @@
       "value": false,
       "p_true": 0.05,
       "abstain": false,
-      "latency_ms": 0.061,
+      "latency_ms": 0.047,
       "reason": "POLICY_REJECT_FREE_TIER_LIMIT_EXCEEDED"
     },
     "request_state": {
@@ -393,7 +393,7 @@
       "value": false,
       "p_true": 0.511607,
       "abstain": true,
-      "latency_ms": 5.287,
+      "latency_ms": 12.872,
       "reason": "MODEL_CONFIDENCE_BELOW_ABSTENTION_THRESHOLD"
     },
     "request_state": {
@@ -420,7 +420,7 @@
       "value": false,
       "p_true": 0.692928,
       "abstain": true,
-      "latency_ms": 5.19,
+      "latency_ms": 13.741,
       "reason": "MODEL_CONFIDENCE_BELOW_ABSTENTION_THRESHOLD"
     },
     "request_state": {
@@ -447,7 +447,7 @@
       "value": true,
       "p_true": 0.902149,
       "abstain": false,
-      "latency_ms": 10.197,
+      "latency_ms": 10.021,
       "reason": "MODEL_GROUNDED_CONFIRMED"
     },
     "request_state": {
@@ -472,7 +472,7 @@
       "value": false,
       "p_true": 0.247386,
       "abstain": false,
-      "latency_ms": 6.541,
+      "latency_ms": 29.32,
       "reason": "MODEL_UNGROUNDED_REJECTED"
     },
     "request_state": {
@@ -497,7 +497,7 @@
       "value": false,
       "p_true": 0.392781,
       "abstain": false,
-      "latency_ms": 8.88,
+      "latency_ms": 51.161,
       "reason": "MODEL_UNGROUNDED_REJECTED"
     },
     "request_state": {
