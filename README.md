@@ -161,6 +161,118 @@ make selfcheck
 make bench
 ```
 
+## How to Run & Test Your Own Custom Data
+
+### 1. Start the Server (Single Command)
+Ensure the local service is running on port 8000:
+```bash
+python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 1
+# or:
+make serve
+```
+
+### 2. Method A: Interactive CLI (Fastest for Manual Testing)
+Test individual tickets interactively without writing JSON by hand:
+```bash
+python scripts/interactive_cli.py
+```
+This lets you pick `route`, `approve`, or `grounded`, enter custom ticket subjects, bodies, customer tiers, refund amounts, draft replies, and KB articles, and prints the full validated response.
+
+### 3. Method B: Batch-Test Your Own JSON Dataset
+To evaluate a batch of your own test cases with automated pass/fail scoring, schema checks, and confusion breakdown:
+```bash
+python testing/run_tests.py path/to/your_dataset.json
+```
+Your JSON dataset should contain an array of test cases formatted as follows:
+```json
+[
+  {
+    "request_id": "custom-001",
+    "decision": "approve",
+    "state": {
+      "subject": "Discrepancy in invoice",
+      "body": "Billed twice for seat renewal.",
+      "customer_tier": "pro",
+      "amount": 35.0
+    },
+    "expected": {
+      "value": true,
+      "abstain": false
+    }
+  }
+]
+```
+The test runner will automatically:
+- Send every request sequentially over HTTP to `POST /v1/decide`
+- Validate schema compliance, required fields, and probability ranges
+- Compare predictions against your expected labels
+- Save structured reports to `testing/results/summary.json` and `results.csv`
+
+### 4. Method C: Send Direct HTTP Requests (cURL / Python)
+You can query the live API with any custom JSON payload:
+
+**cURL Example**:
+```bash
+curl -X POST http://127.0.0.1:8000/v1/decide \
+  -H "Content-Type: application/json" \
+  -d '{
+    "request_id": "my-ticket-1",
+    "decision": "approve",
+    "state": {
+      "subject": "Late delivery refund",
+      "body": "Package arrived 2 weeks late.",
+      "customer_tier": "pro",
+      "amount": 29.99
+    }
+  }'
+```
+
+**Python Script Example**:
+```python
+import requests
+
+resp = requests.post("http://127.0.0.1:8000/v1/decide", json={
+    "request_id": "custom-test-01",
+    "decision": "grounded",
+    "state": {
+      "subject": "Warranty inquiry",
+      "body": "Does this cover water damage?",
+      "customer_tier": "enterprise",
+      "amount": 0.0,
+      "draft_reply": "Water damage is covered under the standard warranty.",
+      "kb_article": "Standard warranty covers defects in materials but explicitly excludes water damage."
+    }
+})
+
+print(resp.status_code, resp.json())
+```
+
+### 5. Method D: Schema Self-Check with Custom Examples File
+Validate schema compliance of your own JSON test file:
+```bash
+python selfcheck.py --file path/to/your_examples.json
+```
+
+### 6. Method E: Direct Offline Python Testing (No HTTP Server Needed)
+You can import and query the trained multi-task model directly in Python without starting the web server:
+```python
+import sys
+sys.path.insert(0, "src")
+import pickle
+
+with open("artifacts/baseline_model.pkl", "rb") as f:
+    model = pickle.load(f)
+
+result = model.predict({
+    "subject": "Invoice overcharge",
+    "body": "I was double charged.",
+    "customer_tier": "pro",
+    "amount": 50.0
+}, decision="route", request_id="offline-01")
+
+print(result)
+```
+
 ## Phase 2 Encoder (Optional — CPU, requires ~500MB download)
 
 ```bash
