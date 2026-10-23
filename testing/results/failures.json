@@ -21,7 +21,7 @@
       },
       "confidence": 0.588774,
       "abstain": true,
-      "latency_ms": 11.314
+      "latency_ms": 9.664
     },
     "request_state": {
       "subject": "Webhook events missing",
@@ -51,7 +51,7 @@
       },
       "confidence": 0.497958,
       "abstain": true,
-      "latency_ms": 7.495
+      "latency_ms": 11.743
     },
     "request_state": {
       "subject": "CSV import rejects valid rows",
@@ -81,7 +81,7 @@
       },
       "confidence": 0.509377,
       "abstain": true,
-      "latency_ms": 12.151
+      "latency_ms": 11.064
     },
     "request_state": {
       "subject": "Merge duplicate profiles",
@@ -111,7 +111,7 @@
       },
       "confidence": 0.46932,
       "abstain": true,
-      "latency_ms": 11.254
+      "latency_ms": 12.105
     },
     "request_state": {
       "subject": "Transfer workspace ownership",
@@ -141,7 +141,7 @@
       },
       "confidence": 0.738107,
       "abstain": false,
-      "latency_ms": 13.135
+      "latency_ms": 11.718
     },
     "request_state": {
       "subject": "Customs clearance delay",
@@ -171,7 +171,7 @@
       },
       "confidence": 0.398338,
       "abstain": true,
-      "latency_ms": 12.721
+      "latency_ms": 10.648
     },
     "request_state": {
       "subject": "Locker pickup code missing",
@@ -201,7 +201,7 @@
       },
       "confidence": 0.547797,
       "abstain": true,
-      "latency_ms": 9.897
+      "latency_ms": 8.281
     },
     "request_state": {
       "subject": "Packaging size restriction",
@@ -231,7 +231,7 @@
       },
       "confidence": 0.456311,
       "abstain": true,
-      "latency_ms": 12.395
+      "latency_ms": 7.354
     },
     "request_state": {
       "subject": "Accessibility statement location",
@@ -261,7 +261,7 @@
       },
       "confidence": 0.552061,
       "abstain": true,
-      "latency_ms": 7.827
+      "latency_ms": 8.46
     },
     "request_state": {
       "subject": "Newsletter subscription",
@@ -285,7 +285,7 @@
       "value": false,
       "p_true": 0.480879,
       "abstain": true,
-      "latency_ms": 6.225
+      "latency_ms": 8.701
     },
     "request_state": {
       "subject": "Metered usage overcharge verified",
@@ -311,7 +311,7 @@
       "value": false,
       "p_true": 0.268239,
       "abstain": true,
-      "latency_ms": 6.657
+      "latency_ms": 7.973
     },
     "request_state": {
       "subject": "Service credit for missed SLA",
@@ -337,7 +337,7 @@
       "value": false,
       "p_true": 0.280548,
       "abstain": true,
-      "latency_ms": 6.831
+      "latency_ms": 7.049
     },
     "request_state": {
       "subject": "Replacement part covered by warranty",
@@ -363,7 +363,7 @@
       "value": false,
       "p_true": 0.057521,
       "abstain": false,
-      "latency_ms": 8.201
+      "latency_ms": 11.1
     },
     "request_state": {
       "subject": "Return received at warehouse",
@@ -389,7 +389,7 @@
       "value": true,
       "p_true": 0.785349,
       "abstain": false,
-      "latency_ms": 9.311
+      "latency_ms": 8.018
     },
     "request_state": {
       "subject": "Gift card already redeemed",
@@ -415,7 +415,7 @@
       "value": true,
       "p_true": 0.767526,
       "abstain": false,
-      "latency_ms": 6.657
+      "latency_ms": 9.258
     },
     "request_state": {
       "subject": "Subscription benefit already credited",
@@ -441,7 +441,7 @@
       "value": false,
       "p_true": 0.511607,
       "abstain": true,
-      "latency_ms": 9.532
+      "latency_ms": 8.324
     },
     "request_state": {
       "subject": "Verified unused annual add-on",
@@ -467,7 +467,7 @@
       "value": false,
       "p_true": 0.692928,
       "abstain": true,
-      "latency_ms": 9.153
+      "latency_ms": 10.095
     },
     "request_state": {
       "subject": "Wrong tax jurisdiction corrected",
@@ -493,7 +493,7 @@
       "value": true,
       "p_true": 0.759356,
       "abstain": true,
-      "latency_ms": 11.153
+      "latency_ms": 8.697
     },
     "request_state": {
       "subject": "Non-refundable setup fee",
@@ -519,7 +519,7 @@
       "value": true,
       "p_true": 0.902149,
       "abstain": false,
-      "latency_ms": 10.564
+      "latency_ms": 9.951
     },
     "request_state": {
       "draft_reply": "Two-factor authentication is mandatory for every account.",
@@ -543,7 +543,7 @@
       "value": false,
       "p_true": 0.247386,
       "abstain": false,
-      "latency_ms": 9.627
+      "latency_ms": 10.25
     },
     "request_state": {
       "draft_reply": "A workspace owner can restore an archived project.",
@@ -567,7 +567,7 @@
       "value": false,
       "p_true": 0.392781,
       "abstain": false,
-      "latency_ms": 10.047
+      "latency_ms": 10.597
     },
     "request_state": {
       "draft_reply": "The report scheduler supports daily and weekly delivery.",
