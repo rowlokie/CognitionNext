@@ -9,3 +9,27 @@ docs/Decide_Hackathon_Implementation_Playbook.docx
 docs/extracted_playbook.txt
 docs/playbook.md
 
+# Scratch exploration and experimental scripts
+scripts/audit_abstention.py
+scripts/benchmark_promoted.py
+scripts/check_user_cases.py
+scripts/debug_test10_logit.py
+scripts/eval_dev_approve.py
+scripts/exp_*.py
+scripts/experiment_*.py
+scripts/generalization_audit.py
+scripts/inspect_docx.py
+scripts/make_v1_backup.py
+scripts/promote_grounded_candidate.py
+scripts/proto_*.py
+scripts/reproduce_failures.py
+scripts/retrain_grounded_candidate.py
+scripts/run_manual_dataset_test.py
+scripts/test_grounded_regression.py
+scripts/test_live_inputs.py
+
+# Backups
+*.bak
+*_backup.*
+
+
