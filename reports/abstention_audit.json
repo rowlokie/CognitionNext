@@ -1,0 +1,182 @@
+{
+  "official_ranking_metrics": {
+    "route": {
+      "n_total": 1500,
+      "n_keep": 1200,
+      "selective_error": 0.06166666666666667,
+      "selective_acc": 0.9383333333333334
+    },
+    "approve": {
+      "n_total": 1500,
+      "n_keep": 1200,
+      "selective_error": 0.08333333333333333,
+      "selective_acc": 0.9166666666666666
+    },
+    "grounded": {
+      "n_total": 1500,
+      "n_keep": 1200,
+      "selective_error": 0.255,
+      "selective_acc": 0.745
+    }
+  },
+  "operational_flag_metrics": {
+    "route": {
+      "threshold": 0.693579,
+      "n_answered": 1170,
+      "n_abstained": 330,
+      "coverage": 0.78,
+      "operational_error": 0.05982905982905983,
+      "operational_acc": 0.9401709401709402
+    },
+    "approve": {
+      "threshold": 0.76351,
+      "n_answered": 1204,
+      "n_abstained": 296,
+      "coverage": 0.8026666666666666,
+      "operational_error": 0.08305647840531562,
+      "operational_acc": 0.9169435215946844
+    },
+    "grounded": {
+      "threshold": 0.5624720000000001,
+      "n_answered": 1185,
+      "n_abstained": 315,
+      "coverage": 0.79,
+      "operational_error": 0.2540084388185654,
+      "operational_acc": 0.7459915611814346
+    }
+  },
+  "sensitivity_sweep": {
+    "route": [
+      {
+        "threshold": 0.5,
+        "coverage": 0.9046666666666666,
+        "op_error": 0.09948415622697127,
+        "ranking_error": 0.06166666666666667
+      },
+      {
+        "threshold": 0.6,
+        "coverage": 0.8433333333333334,
+        "op_error": 0.0774703557312253,
+        "ranking_error": 0.06166666666666667
+      },
+      {
+        "threshold": 0.7,
+        "coverage": 0.7753333333333333,
+        "op_error": 0.05932932072226999,
+        "ranking_error": 0.06166666666666667
+      },
+      {
+        "threshold": 0.75,
+        "coverage": 0.742,
+        "op_error": 0.05480682839173405,
+        "ranking_error": 0.06166666666666667
+      },
+      {
+        "threshold": 0.8,
+        "coverage": 0.6933333333333334,
+        "op_error": 0.052884615384615384,
+        "ranking_error": 0.06166666666666667
+      },
+      {
+        "threshold": 0.85,
+        "coverage": 0.6146666666666667,
+        "op_error": 0.05314533622559653,
+        "ranking_error": 0.06166666666666667
+      },
+      {
+        "threshold": 0.9,
+        "coverage": 0.3953333333333333,
+        "op_error": 0.050590219224283306,
+        "ranking_error": 0.06166666666666667
+      }
+    ],
+    "approve": [
+      {
+        "threshold": 0.5,
+        "coverage": 1.0,
+        "op_error": 0.16,
+        "ranking_error": 0.08333333333333333
+      },
+      {
+        "threshold": 0.6,
+        "coverage": 0.942,
+        "op_error": 0.13305024769992924,
+        "ranking_error": 0.08333333333333333
+      },
+      {
+        "threshold": 0.7,
+        "coverage": 0.8753333333333333,
+        "op_error": 0.1012947448591013,
+        "ranking_error": 0.08333333333333333
+      },
+      {
+        "threshold": 0.75,
+        "coverage": 0.822,
+        "op_error": 0.08434712084347121,
+        "ranking_error": 0.08333333333333333
+      },
+      {
+        "threshold": 0.8,
+        "coverage": 0.7206666666666667,
+        "op_error": 0.06753006475485661,
+        "ranking_error": 0.08333333333333333
+      },
+      {
+        "threshold": 0.85,
+        "coverage": 0.5853333333333334,
+        "op_error": 0.05353075170842825,
+        "ranking_error": 0.08333333333333333
+      },
+      {
+        "threshold": 0.9,
+        "coverage": 0.422,
+        "op_error": 0.01579778830963665,
+        "ranking_error": 0.08333333333333333
+      }
+    ],
+    "grounded": [
+      {
+        "threshold": 0.5,
+        "coverage": 1.0,
+        "op_error": 0.2886666666666667,
+        "ranking_error": 0.255
+      },
+      {
+        "threshold": 0.6,
+        "coverage": 0.676,
+        "op_error": 0.2357001972386588,
+        "ranking_error": 0.255
+      },
+      {
+        "threshold": 0.7,
+        "coverage": 0.456,
+        "op_error": 0.17105263157894737,
+        "ranking_error": 0.255
+      },
+      {
+        "threshold": 0.75,
+        "coverage": 0.32866666666666666,
+        "op_error": 0.15415821501014199,
+        "ranking_error": 0.255
+      },
+      {
+        "threshold": 0.8,
+        "coverage": 0.168,
+        "op_error": 0.12301587301587301,
+        "ranking_error": 0.255
+      },
+      {
+        "threshold": 0.85,
+        "coverage": 0.07533333333333334,
+        "op_error": 0.07079646017699115,
+        "ranking_error": 0.255
+      },
+      {
+        "threshold": 0.9,
+        "coverage": 0.04666666666666667,
+        "op_error": 0.07142857142857142,
+        "ranking_error": 0.255
+      }
+    ]
+  }
+}
