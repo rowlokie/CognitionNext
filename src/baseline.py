@@ -187,8 +187,9 @@ def structured_grounded(state: dict) -> np.ndarray:
 
 class BaselineModel:
     """
-    TF-IDF (word + char) + structured features + calibrated LogisticRegression
-    for each of the three tasks. One shared sklearn pipeline per task.
+    TF-IDF (word + char) single shared representation backbone + structured features
+    + calibrated LogisticRegression for each of the three tasks.
+    One shared feature representation backbone with three task heads.
     """
 
     def __init__(self):
@@ -196,20 +197,54 @@ class BaselineModel:
         self.approve_model = None
         self.grounded_model = None
 
-        # TF-IDF vectorizers (shared word, shared char)
-        self.route_tfidf_word = None
-        self.route_tfidf_char = None
-        self.approve_tfidf_word = None
-        self.approve_tfidf_char = None
-        self.grounded_tfidf_word = None
-        self.grounded_tfidf_char = None
+        # ONE shared representation backbone (word + char TF-IDF across all tasks)
+        self.shared_tfidf_word = None
+        self.shared_tfidf_char = None
+
+        # Prediction decision thresholds
+        self.prediction_thresholds = {
+            "approve": 0.730,
+            "grounded": 0.510,
+        }
 
         # Abstention thresholds (set after calibration)
-        self.thresholds = {
-            "route": 0.5,
-            "approve": 0.75,
-            "grounded": 0.5,
+        self.abstention_thresholds = {
+            "route": 0.687228,
+            "approve": 0.769230,
+            "grounded": 0.561569,
         }
+
+    @property
+    def thresholds(self):
+        return self.abstention_thresholds
+
+    @thresholds.setter
+    def thresholds(self, val):
+        self.abstention_thresholds = val
+
+    @property
+    def route_tfidf_word(self):
+        return self.shared_tfidf_word
+
+    @property
+    def route_tfidf_char(self):
+        return self.shared_tfidf_char
+
+    @property
+    def approve_tfidf_word(self):
+        return self.shared_tfidf_word
+
+    @property
+    def approve_tfidf_char(self):
+        return self.shared_tfidf_char
+
+    @property
+    def grounded_tfidf_word(self):
+        return self.shared_tfidf_word
+
+    @property
+    def grounded_tfidf_char(self):
+        return self.shared_tfidf_char
 
     def _build_tfidf_pair(self):
         word_vec = TfidfVectorizer(
@@ -245,68 +280,69 @@ class BaselineModel:
         """
         print("Building feature matrices...")
 
-        # Route
+        # Collect text across all three tasks for the shared representation backbone
         route_texts = [serialize_route(r["state"]) for r in train_records]
         route_struct = [structured_route(r["state"]) for r in train_records]
         route_labels = [r["labels"]["route"] for r in train_records]
 
-        self.route_tfidf_word, self.route_tfidf_char = self._build_tfidf_pair()
-        X_route = self._combine_features(
-            route_texts, route_struct,
-            self.route_tfidf_word, self.route_tfidf_char, fit=True
-        )
-        print(f"  Route features: {X_route.shape}")
-
-        # Approve
         approve_texts = [serialize_approve(r["state"]) for r in train_records]
         approve_struct = [structured_approve(r["state"]) for r in train_records]
         approve_labels = [int(r["labels"]["approve"]) for r in train_records]
 
-        self.approve_tfidf_word, self.approve_tfidf_char = self._build_tfidf_pair()
-        X_approve = self._combine_features(
-            approve_texts, approve_struct,
-            self.approve_tfidf_word, self.approve_tfidf_char, fit=True
-        )
-        print(f"  Approve features: {X_approve.shape}")
-
-        # Grounded
         grounded_texts = [serialize_grounded(r["state"]) for r in train_records]
         grounded_struct = [structured_grounded(r["state"]) for r in train_records]
         grounded_labels = [int(r["labels"]["grounded"]) for r in train_records]
 
-        self.grounded_tfidf_word, self.grounded_tfidf_char = self._build_tfidf_pair()
+        all_texts = route_texts + approve_texts + grounded_texts
+        self.shared_tfidf_word, self.shared_tfidf_char = self._build_tfidf_pair()
+        print(f"  Fitting ONE shared representation backbone on {len(all_texts)} combined text instances...")
+        self.shared_tfidf_word.fit(all_texts)
+        self.shared_tfidf_char.fit(all_texts)
+
+        X_route = self._combine_features(
+            route_texts, route_struct,
+            self.shared_tfidf_word, self.shared_tfidf_char, fit=False
+        )
+        print(f"  Route features: {X_route.shape}")
+
+        X_approve = self._combine_features(
+            approve_texts, approve_struct,
+            self.shared_tfidf_word, self.shared_tfidf_char, fit=False
+        )
+        print(f"  Approve features: {X_approve.shape}")
+
         X_grounded = self._combine_features(
             grounded_texts, grounded_struct,
-            self.grounded_tfidf_word, self.grounded_tfidf_char, fit=True
+            self.shared_tfidf_word, self.shared_tfidf_char, fit=False
         )
         print(f"  Grounded features: {X_grounded.shape}")
 
         # Train classifiers
         print("Training classifiers...")
-        lr_kwargs = dict(max_iter=1000, C=1.0, class_weight="balanced", solver="saga", n_jobs=-1)
+        lr_kwargs = dict(max_iter=1000, C=1.0, class_weight="balanced", solver="saga")
 
         # Route: multiclass (multinomial handled automatically by saga solver)
         base_route = LogisticRegression(**lr_kwargs)
         self.route_model = CalibratedClassifierCV(base_route, method="isotonic", cv=3)
         self.route_model.fit(X_route, route_labels)
-        print("  ✓ Route model trained")
+        print("  [OK] Route model trained")
 
         # Approve: binary
         base_approve = LogisticRegression(**lr_kwargs)
         self.approve_model = CalibratedClassifierCV(base_approve, method="isotonic", cv=3)
         self.approve_model.fit(X_approve, approve_labels)
-        print("  ✓ Approve model trained")
+        print("  [OK] Approve model trained")
 
         # Grounded: binary
         base_grounded = LogisticRegression(**lr_kwargs)
         self.grounded_model = CalibratedClassifierCV(base_grounded, method="isotonic", cv=3)
         self.grounded_model.fit(X_grounded, grounded_labels)
-        print("  ✓ Grounded model trained")
+        print("  [OK] Grounded model trained")
 
     def _predict_route(self, state: dict):
         text = serialize_route(state)
         struct = structured_route(state)
-        X = self._combine_features([text], [struct], self.route_tfidf_word, self.route_tfidf_char)
+        X = self._combine_features([text], [struct], self.shared_tfidf_word, self.shared_tfidf_char)
         probs = self.route_model.predict_proba(X)[0]
         classes = self.route_model.classes_
         prob_dict = {cls: float(p) for cls, p in zip(classes, probs)}
@@ -320,20 +356,20 @@ class BaselineModel:
             prob_dict = {k: v / total for k, v in prob_dict.items()}
         value = max(prob_dict, key=prob_dict.get)
         confidence = prob_dict[value]
-        abstain = confidence < self.thresholds["route"]
+        abstain = confidence < self.abstention_thresholds.get("route", 0.5)
         return value, prob_dict, confidence, abstain
 
     def _predict_binary(self, state: dict, task: str):
         if task == "approve":
             text = serialize_approve(state)
             struct = structured_approve(state)
-            X = self._combine_features([text], [struct], self.approve_tfidf_word, self.approve_tfidf_char)
+            X = self._combine_features([text], [struct], self.shared_tfidf_word, self.shared_tfidf_char)
             probs = self.approve_model.predict_proba(X)[0]
             classes = list(self.approve_model.classes_)
         else:  # grounded
             text = serialize_grounded(state)
             struct = structured_grounded(state)
-            X = self._combine_features([text], [struct], self.grounded_tfidf_word, self.grounded_tfidf_char)
+            X = self._combine_features([text], [struct], self.shared_tfidf_word, self.shared_tfidf_char)
             probs = self.grounded_model.predict_proba(X)[0]
             classes = list(self.grounded_model.classes_)
 
@@ -346,9 +382,10 @@ class BaselineModel:
             p_true = float(probs[-1])
 
         p_true = max(0.0, min(1.0, p_true))
-        value = p_true >= 0.5
+        thresh = self.prediction_thresholds.get(task, 0.5)
+        value = p_true >= thresh
         confidence = max(p_true, 1 - p_true)
-        abstain = confidence < self.thresholds[task]
+        abstain = confidence < self.abstention_thresholds.get(task, 0.5)
         return value, p_true, confidence, abstain
 
     def predict(self, state: dict, decision: str, request_id: str = "") -> dict:
@@ -388,7 +425,7 @@ class BaselineModel:
         path.mkdir(parents=True, exist_ok=True)
         with open(path / "baseline_model.pkl", "wb") as f:
             pickle.dump(self, f, protocol=5)
-        print(f"  ✓ Baseline model saved to {path}/baseline_model.pkl")
+        print(f"  [OK] Baseline model saved to {path}/baseline_model.pkl")
 
     @classmethod
     def load(cls, path: Path) -> "BaselineModel":

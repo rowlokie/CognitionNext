@@ -75,7 +75,6 @@ def test_error_handling():
     print("\n" + "=" * 60)
     print("  [PASS] ALL ERROR & EDGE-CASE TESTS PASSED")
     print("=" * 60)
-    return True
 
 if __name__ == "__main__":
     test_error_handling()

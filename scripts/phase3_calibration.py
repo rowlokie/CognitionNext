@@ -345,4 +345,4 @@ if __name__ == "__main__":
     else:
         model.save(ARTIFACTS_DIR)
 
-    print("\n✓ Phase 3 complete.")
+    print("\n[OK] Phase 3 complete.")

@@ -1,32 +1,32 @@
 {
   "latency": {
     "route": {
-      "p50_ms": 7.023,
-      "p95_ms": 8.895,
-      "p99_ms": 10.565,
-      "mean_ms": 7.232,
-      "min_ms": 6.18,
-      "max_ms": 14.529,
+      "p50_ms": 6.427,
+      "p95_ms": 7.374,
+      "p99_ms": 8.401,
+      "mean_ms": 6.528,
+      "min_ms": 5.902,
+      "max_ms": 9.949,
       "n_requests": 500,
       "n_errors": 0
     },
     "approve": {
-      "p50_ms": 6.411,
-      "p95_ms": 8.248,
-      "p99_ms": 9.682,
-      "mean_ms": 6.633,
-      "min_ms": 5.606,
-      "max_ms": 12.289,
+      "p50_ms": 5.626,
+      "p95_ms": 6.571,
+      "p99_ms": 7.872,
+      "mean_ms": 5.762,
+      "min_ms": 5.149,
+      "max_ms": 11.074,
       "n_requests": 500,
       "n_errors": 0
     },
     "grounded": {
-      "p50_ms": 6.705,
-      "p95_ms": 9.598,
-      "p99_ms": 11.388,
-      "mean_ms": 7.118,
-      "min_ms": 5.794,
-      "max_ms": 12.138,
+      "p50_ms": 6.105,
+      "p95_ms": 7.621,
+      "p99_ms": 9.429,
+      "mean_ms": 6.308,
+      "min_ms": 5.451,
+      "max_ms": 16.223,
       "n_requests": 500,
       "n_errors": 0
     },
@@ -35,5 +35,32 @@
       "mode": "warm_sequential_single",
       "server": "http://127.0.0.1:8000"
     }
+  },
+  "dev_metrics": {
+    "route": {
+      "macro_f1": 0.8421452812690646,
+      "ece": 0.06247593666666661,
+      "brier_skill": 0.27145665080041914
+    },
+    "approve": {
+      "f1": 0.8093645484949833,
+      "ece": 0.01973632133333332,
+      "brier_skill": 0.5918545047385608,
+      "cost": 414
+    },
+    "grounded": {
+      "macro_f1": 0.6678005944297909,
+      "ece": 0.03842256000000001,
+      "brier_skill": 0.1750746959376328
+    }
+  },
+  "decision_thresholds": {
+    "approve": 0.7000000000000004,
+    "grounded": 0.5100000000000002
+  },
+  "abstention_thresholds": {
+    "route": 0.693579,
+    "approve": 0.76351,
+    "grounded": 0.5624720000000001
   }
 }

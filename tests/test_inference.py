@@ -91,7 +91,6 @@ def test_inference_tasks():
     print("\n" + "=" * 60)
     print("  [PASS] ALL INFERENCE TESTS PASSED")
     print("=" * 60)
-    return True
 
 if __name__ == "__main__":
     test_inference_tasks()

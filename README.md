@@ -111,18 +111,19 @@ Response:
 **Single backbone with three task heads** (not three separate models):
 
 ```
-src/baseline.py — BaselineModel
-├── route_tfidf_word / route_tfidf_char   (shared TF-IDF vectorizers)
-├── approve_tfidf_word / approve_tfidf_char
-├── grounded_tfidf_word / grounded_tfidf_char
+src/baseline.py — BaselineModel (Phase 1 Baseline & Production Model)
+├── shared_tfidf_word / shared_tfidf_char (ONE shared representation backbone across all tasks)
+│   ├── word n-grams (1-2), 50K max features, sublinear TF
+│   └── char n-grams (3-5), 30K max features, sublinear TF
+├── structured features (tier one-hot, log1p amount, amount bands, length & overlap features)
 │
 └── predict(state, decision) → full response dict
-    ├── "route"    → route_model (CalibratedLR on shared text repr)
-    ├── "approve"  → approve_model
-    └── "grounded" → grounded_model
+    ├── "route"    → route_model (Calibrated multiclass LR over 5 queues)
+    ├── "approve"  → approve_model (Calibrated binary LR + tuned 0.700 cost threshold)
+    └── "grounded" → grounded_model (Calibrated binary LR + lexical overlap features)
 
-src/encoder_model.py — SharedEncoderModel (Phase 2, optional)
-├── encoder: all-MiniLM-L6-v2 (ONE shared backbone)
+src/encoder_model.py — SharedEncoderModel (Phase 2 Neural Alternative)
+├── encoder: all-MiniLM-L6-v2 (ONE shared learned transformer backbone)
 ├── route_head: Linear(384+14 → 256 → 5)
 ├── approve_head: Linear(384+14 → 128 → 1)
 └── grounded_head: Linear(384+14 → 128 → 1)
@@ -204,9 +205,9 @@ make calibrate
 
 ## Artifact Size
 
-- `artifacts/baseline_model.pkl`: ~30–80MB (TF-IDF + calibrated LR)
-- `artifacts/encoder_model.pkl` (if trained): ~90MB (MiniLM-L6-v2 + heads)
-- Total target: <150MB
+- `artifacts/baseline_model.pkl`: **5.32 MB** (compact multi-task representation backbone)
+- `artifacts/thresholds.json`: **<1 KB** (calibrated decision and abstention thresholds)
+- Total production footprint: **5.32 MB** (well below the 500 MB hackathon limit)
 
 ## Project Layout
 

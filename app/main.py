@@ -116,6 +116,23 @@ def load_model():
         import pickle
         with open(baseline_path, "rb") as f:
             _model = pickle.load(f)
+
+        # Apply calibrated thresholds if available
+        thresh_path = ARTIFACTS_DIR / "thresholds.json"
+        if thresh_path.exists():
+            try:
+                import json
+                with open(thresh_path, "r") as tf:
+                    tdata = json.load(tf)
+                if hasattr(_model, "prediction_thresholds") and "prediction" in tdata:
+                    _model.prediction_thresholds.update(tdata["prediction"])
+                if hasattr(_model, "abstention_thresholds") and "abstention" in tdata:
+                    _model.abstention_thresholds.update(tdata["abstention"])
+                elif hasattr(_model, "thresholds") and "abstention" in tdata:
+                    _model.thresholds.update(tdata["abstention"])
+            except Exception as te:
+                print(f"[startup] Warning loading thresholds: {te}")
+
         print(f"[startup] Loaded Phase 1 baseline model from {baseline_path}")
         return
 
