@@ -1,4 +1,4 @@
-# Decide — CPU-Only Typed Decision Engine
+# DecisAI — CPU-Only Typed Decision Engine
 
 A single-endpoint ML service answering three typed decisions about customer-support tickets.
 No network calls, no LLMs, no GPU required.
