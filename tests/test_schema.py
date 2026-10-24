@@ -95,7 +95,7 @@ def run_tests():
             print(f"  Waiting for server... ({attempt+1}/10)")
             time.sleep(1)
     else:
-        print("  [FAIL] Server not responding. Start with: python -m uvicorn app.main:app")
+        print("  [FAIL] Server not responding. Start with: python -m uvicorn app:app")
         return False
 
     all_passed = True

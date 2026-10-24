@@ -58,7 +58,14 @@ UNCERTAINTY_PATTERNS = [
     "inconclusive",
     "logs are not yet available",
     "not yet been verified",
-    "pending review"
+    "pending review",
+    "unclear",
+    "cannot be determined",
+    "no invoice",
+    "no evidence",
+    "sparse details",
+    "unverified",
+    "not verified",
 ]
 
 

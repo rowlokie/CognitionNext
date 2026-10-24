@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 """
-FastAPI application for the Decide endpoint.
-POST /v1/decide
+app.py — Fast, CPU-only ASGI Decision Engine Service.
+Runs via: uvicorn app:app --host 0.0.0.0 --port 8000 --workers 1
 
-Priority: schema validity > latency > accuracy
-Always keeps Phase 1 baseline alive; upgrades to Phase 2 model transparently.
+Endpoints:
+- POST /v1/decide : Unified decision endpoint (route, approve, grounded)
+- GET /health     : Health check endpoint
+- GET /           : Root info endpoint
 """
 
 import gc
-import os
+import sys
 import time
 from pathlib import Path
 from typing import Optional
@@ -16,13 +18,14 @@ from typing import Optional
 import orjson
 import uvicorn
 from fastapi import FastAPI, Request, Response
-from fastapi.responses import ORJSONResponse
-from pydantic import BaseModel, field_validator, model_validator
+from fastapi.encoders import jsonable_encoder
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel, field_validator
 
-# -----------------------------------------------------------------------
-# Paths
-# -----------------------------------------------------------------------
-ROOT = Path(__file__).parent.parent
+import model
+
+ROOT = Path(__file__).parent
 ARTIFACTS_DIR = ROOT / "artifacts"
 
 # -----------------------------------------------------------------------
@@ -75,85 +78,16 @@ class DecideRequest(BaseModel):
 
 
 # -----------------------------------------------------------------------
-# App and model loading
+# App and model lifecycle
 # -----------------------------------------------------------------------
 
 app = FastAPI(title="Decide API", version="1.0.0")
 
-_model = None
-
-
-def get_model():
-    global _model
-    if _model is None:
-        raise RuntimeError("Model not loaded")
-    return _model
-
-
-def load_model():
-    """Load the best available model: Phase 2 encoder or Phase 1 baseline."""
-    global _model
-
-    # Try Phase 2 encoder model first
-    encoder_path = ARTIFACTS_DIR / "encoder_model.pkl"
-    baseline_path = ARTIFACTS_DIR / "baseline_model.pkl"
-
-    if encoder_path.exists():
-        try:
-            import sys
-            sys.path.insert(0, str(ROOT / "src"))
-            import pickle
-            with open(encoder_path, "rb") as f:
-                _model = pickle.load(f)
-            print(f"[startup] Loaded Phase 2 encoder model from {encoder_path}")
-            return
-        except Exception as e:
-            print(f"[startup] Phase 2 model failed to load: {e}. Falling back to baseline.")
-
-    if baseline_path.exists():
-        import sys
-        sys.path.insert(0, str(ROOT / "src"))
-        import pickle
-        with open(baseline_path, "rb") as f:
-            _model = pickle.load(f)
-
-        # Apply calibrated thresholds if available
-        thresh_path = ARTIFACTS_DIR / "thresholds.json"
-        if thresh_path.exists():
-            try:
-                import json
-                with open(thresh_path, "r") as tf:
-                    tdata = json.load(tf)
-                if hasattr(_model, "prediction_thresholds") and "prediction" in tdata:
-                    _model.prediction_thresholds.update(tdata["prediction"])
-                if hasattr(_model, "abstention_thresholds") and "abstention" in tdata:
-                    _model.abstention_thresholds.update(tdata["abstention"])
-                elif hasattr(_model, "thresholds") and "abstention" in tdata:
-                    _model.thresholds.update(tdata["abstention"])
-            except Exception as te:
-                print(f"[startup] Warning loading thresholds: {te}")
-
-        # Reload policy config if available
-        try:
-            from policy import policy_config
-            policy_config.reload()
-            print("[startup] Reloaded approval policy config")
-        except Exception as pe:
-            print(f"[startup] Warning loading policy config: {pe}")
-
-        print(f"[startup] Loaded Phase 1 baseline model from {baseline_path}")
-        return
-
-    raise RuntimeError(
-        f"No model found in {ARTIFACTS_DIR}. Run: python src/baseline.py"
-    )
-
 
 @app.on_event("startup")
 async def startup_event():
-    load_model()
-    # Warm up with dummy requests
-    model = get_model()
+    model.load_model(ARTIFACTS_DIR)
+    # Warm up with dummy requests across all three tasks
     dummy_state = {
         "subject": "test",
         "body": "test body",
@@ -165,7 +99,7 @@ async def startup_event():
     for decision in ["route", "approve", "grounded"]:
         model.predict(dummy_state, decision, "warmup")
     gc.freeze()
-    print("[startup] Model warmed up. Ready to serve.")
+    print("[startup] Model loaded and warmed up. Ready to serve.")
 
 
 # -----------------------------------------------------------------------
@@ -174,16 +108,15 @@ async def startup_event():
 
 @app.post("/v1/decide")
 async def decide(request: DecideRequest):
-    model = get_model()
     state_dict = request.state.model_dump()
 
     try:
         result = model.predict(state_dict, request.decision, request.request_id)
     except ValueError as e:
-        # Unknown decision (should be caught by validator, but belt-and-suspenders)
-        return ORJSONResponse(
+        return Response(
+            content=orjson.dumps({"detail": str(e)}),
             status_code=422,
-            content={"detail": str(e)}
+            media_type="application/json"
         )
 
     # Strictly adhere to judging schema: exactly the required fields, no extra keys
@@ -209,12 +142,15 @@ async def decide(request: DecideRequest):
             "latency_ms": float(result.get("latency_ms", 0.0)),
         }
 
-    return ORJSONResponse(content=public_resp)
+    return Response(
+        content=orjson.dumps(public_resp),
+        media_type="application/json"
+    )
 
 
 @app.get("/health")
 async def health():
-    return {"status": "ok", "model_loaded": _model is not None}
+    return {"status": "ok", "model_loaded": model.is_loaded()}
 
 
 @app.get("/")
@@ -223,12 +159,8 @@ async def root():
 
 
 # -----------------------------------------------------------------------
-# Error handler for validation errors
+# Validation error handler
 # -----------------------------------------------------------------------
-
-from fastapi.encoders import jsonable_encoder
-from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse
 
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
@@ -238,15 +170,9 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
     )
 
 
-# -----------------------------------------------------------------------
-# Main
-# -----------------------------------------------------------------------
-
 if __name__ == "__main__":
-    import sys
-    sys.path.insert(0, str(ROOT / "src"))
     uvicorn.run(
-        "app.main:app",
+        "app:app",
         host="0.0.0.0",
         port=8000,
         workers=1,

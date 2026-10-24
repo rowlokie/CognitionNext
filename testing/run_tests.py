@@ -112,7 +112,7 @@ def run_tests(dataset_path=DEFAULT_DATASET_PATH, api_url=DEFAULT_API_URL):
     except Exception as e:
         print(f"[ERROR] Could not connect to API at {api_url}: {e}")
         print("Please start the API server using:")
-        print("  python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 1")
+        print("  python -m uvicorn app:app --host 0.0.0.0 --port 8000 --workers 1")
         sys.exit(1)
 
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)

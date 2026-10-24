@@ -1,108 +1,109 @@
 {
-  "dataset_name": "Decide Fresh Manual QA Dataset",
+  "dataset_name": "Decide API Manual QA Dataset",
   "version": "1.0",
-  "dataset_path": "E:\\CongnizationNext\\testing\\decide_fresh_manual_test_dataset_100.json",
+  "dataset_path": "testing\\decide_manual_test_dataset_100.json",
   "total_cases": 100,
-  "total_passed": 82,
-  "total_failed": 18,
-  "overall_pass_rate": 82.0,
+  "total_passed": 81,
+  "total_failed": 19,
+  "overall_pass_rate": 81.0,
   "tasks": {
     "route": {
       "total": 40,
-      "passed": 31,
-      "failed": 9,
-      "prediction_accuracy": 77.5,
-      "abstention_rate": 75.0,
+      "passed": 35,
+      "failed": 5,
+      "prediction_accuracy": 87.5,
+      "abstention_rate": 27.5,
       "api_errors": 0,
       "schema_errors": 0,
       "latency": {
-        "mean_ms": 22.65,
-        "p50_ms": 20.98,
-        "p90_ms": 28.87,
-        "p95_ms": 34.91,
-        "p99_ms": 40.28,
-        "min_ms": 15.33,
-        "max_ms": 43.19
+        "mean_ms": 19.46,
+        "p50_ms": 20.35,
+        "p90_ms": 27.67,
+        "p95_ms": 28.38,
+        "p99_ms": 35.72,
+        "min_ms": 8.03,
+        "max_ms": 38.42
       }
     },
     "approve": {
       "total": 30,
-      "passed": 24,
-      "failed": 6,
-      "overall_pass_rate": 80.0,
+      "passed": 21,
+      "failed": 9,
+      "overall_pass_rate": 70.0,
       "standard_cases": {
-        "total": 20,
-        "prediction_accuracy": 70.0,
-        "abstention_rate": 30.0
+        "total": 21,
+        "prediction_accuracy": 76.19,
+        "abstention_rate": 33.33
       },
       "ambiguous_cases": {
-        "total": 10,
-        "abstained_as_expected": 10,
-        "expected_abstention_rate": 100.0,
-        "unexpected_no_abstain_failures": 0
+        "total": 9,
+        "abstained_as_expected": 5,
+        "expected_abstention_rate": 55.56,
+        "unexpected_no_abstain_failures": 4
       },
       "api_errors": 0,
       "schema_errors": 0,
       "latency": {
-        "mean_ms": 13.17,
-        "p50_ms": 12.35,
-        "p90_ms": 26.17,
-        "p95_ms": 26.94,
-        "p99_ms": 30.37,
-        "min_ms": 4.64,
-        "max_ms": 31.67
+        "mean_ms": 15.75,
+        "p50_ms": 14.5,
+        "p90_ms": 26.13,
+        "p95_ms": 30.55,
+        "p99_ms": 33.32,
+        "min_ms": 3.14,
+        "max_ms": 34.37
       }
     },
     "grounded": {
       "total": 30,
-      "passed": 27,
-      "failed": 3,
-      "overall_pass_rate": 90.0,
+      "passed": 25,
+      "failed": 5,
+      "overall_pass_rate": 83.33,
       "standard_cases": {
-        "total": 29,
-        "prediction_accuracy": 89.66,
-        "abstention_rate": 3.45
+        "total": 30,
+        "prediction_accuracy": 83.33,
+        "abstention_rate": 3.33
       },
       "ambiguous_cases": {
-        "total": 1,
-        "abstained_as_expected": 1,
-        "expected_abstention_rate": 100.0,
+        "total": 0,
+        "abstained_as_expected": 0,
+        "expected_abstention_rate": 0.0,
         "unexpected_no_abstain_failures": 0
       },
       "api_errors": 0,
       "schema_errors": 0,
       "latency": {
-        "mean_ms": 21.35,
-        "p50_ms": 19.63,
-        "p90_ms": 31.42,
-        "p95_ms": 33.74,
-        "p99_ms": 36.97,
-        "min_ms": 13.01,
-        "max_ms": 37.72
+        "mean_ms": 22.53,
+        "p50_ms": 24.79,
+        "p90_ms": 31.11,
+        "p95_ms": 33.33,
+        "p99_ms": 34.46,
+        "min_ms": 9.17,
+        "max_ms": 34.89
       }
     }
   },
   "latency_statistics": {
     "roundtrip": {
-      "mean_ms": 19.41,
-      "p50_ms": 19.71,
-      "p90_ms": 27.73,
-      "p95_ms": 32.45,
-      "p99_ms": 37.77,
-      "min_ms": 4.64,
-      "max_ms": 43.19
+      "mean_ms": 19.27,
+      "p50_ms": 20.08,
+      "p90_ms": 29.03,
+      "p95_ms": 31.59,
+      "p99_ms": 34.93,
+      "min_ms": 3.14,
+      "max_ms": 38.42
     },
     "server_internal": {
-      "mean_ms": 11.15,
-      "p50_ms": 12.8,
-      "p90_ms": 16.21,
-      "p95_ms": 18.67,
-      "p99_ms": 21.44,
+      "mean_ms": 7.04,
+      "p50_ms": 7.07,
+      "p90_ms": 10.96,
+      "p95_ms": 11.8,
+      "p99_ms": 13.58,
       "min_ms": 0.02,
-      "max_ms": 23.15
+      "max_ms": 15.94
     }
   },
   "failure_counts_by_type": {
-    "PREDICTION_MISMATCH": 18
+    "PREDICTION_MISMATCH": 15,
+    "UNEXPECTED_NO_ABSTENTION": 4
   }
 }

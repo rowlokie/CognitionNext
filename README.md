@@ -106,12 +106,25 @@ Response:
 }
 ```
 
+## Repository Structure (PS 2 Submission Format)
+
+```
+CognitionNext/
+├── app.py            # ASGI service at repo root. Runs via: uvicorn app:app
+├── model.py          # Decision engine: multi-task model, policy engine, feature extraction
+├── requirements.txt  # Serving dependencies only (<30s install, CPU-only)
+├── README.md         # Single startup command, architecture, and examiner testing guide
+├── model_card.md     # Model card: data splits, calibration, confusion matrices, trade-offs
+├── results.json      # Dev benchmark results, latency percentiles, calibration ECE
+└── artifacts/        # Committed model weights (baseline_model.pkl) & calibrated thresholds
+```
+
 ## Where the Shared Backbone Lives
 
 **Single backbone with three task heads** (not three separate models):
 
 ```
-src/baseline.py — BaselineModel (Phase 1 Baseline & Production Model)
+model.py — BaselineModel (Production Multi-Task Architecture)
 ├── shared_tfidf_word / shared_tfidf_char (ONE shared representation backbone across all tasks)
 │   ├── word n-grams (1-2), 50K max features, sublinear TF
 │   └── char n-grams (3-5), 30K max features, sublinear TF
@@ -119,17 +132,11 @@ src/baseline.py — BaselineModel (Phase 1 Baseline & Production Model)
 │
 └── predict(state, decision) → full response dict
     ├── "route"    → route_model (Calibrated multiclass LR over 5 queues)
-    ├── "approve"  → approve_model (Calibrated binary LR + tuned 0.700 cost threshold)
-    └── "grounded" → grounded_model (Calibrated binary LR + lexical overlap features)
-
-src/encoder_model.py — SharedEncoderModel (Phase 2 Neural Alternative)
-├── encoder: all-MiniLM-L6-v2 (ONE shared learned transformer backbone)
-├── route_head: Linear(384+14 → 256 → 5)
-├── approve_head: Linear(384+14 → 128 → 1)
-└── grounded_head: Linear(384+14 → 128 → 1)
+    ├── "approve"  → ApprovalPolicyEngine (tier limits & epistemic uncertainty) + approve_model
+    └── "grounded" → grounded_model (Calibrated binary LR + lexical & contradiction indicators)
 ```
 
-The `predict(state, decision)` interface is identical — `app/main.py` uses whichever model is present in `artifacts/`.
+The `predict(state, decision)` interface is unified — `app.py` loads from `artifacts/` and serves sub-25ms inference.
 
 ## Commands
 
@@ -137,19 +144,10 @@ The `predict(state, decision)` interface is identical — `app/main.py` uses whi
 # Install dependencies
 pip install -r requirements.txt
 
-# Audit data (Phase 0)
-make audit
-
-# Train baseline (Phase 1)
-make train-baseline
-
-# Calibrate thresholds (Phase 3)
-make calibrate
-
-# Start server (always uses best available model)
+# Start server (Single Startup Command)
+uvicorn app:app --host 0.0.0.0 --port 8000 --workers 1
+# or simply:
 make serve
-# or directly:
-python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 1
 
 # Run schema tests (server must be running)
 make test
@@ -180,7 +178,7 @@ pip install -r requirements.txt
 ### Step 3: Start the Service (Single Startup Command)
 The examiner starts the local inference server on port 8000:
 ```bash
-python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 1
+uvicorn app:app --host 0.0.0.0 --port 8000 --workers 1
 # (Or simply: make serve)
 ```
 - The server loads the trained multi-task model from `artifacts/baseline_model.pkl` in **~0.3 seconds**.

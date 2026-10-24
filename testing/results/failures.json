@@ -1,96 +1,66 @@
 [
   {
-    "request_id": "route-new-010",
+    "request_id": "route-006",
     "task": "route",
     "failure_type": "PREDICTION_MISMATCH",
-    "failure_detail": "Predicted 'shipping', expected 'technical'",
+    "failure_detail": "Predicted 'shipping', expected 'billing'",
     "expected": {
-      "value": "technical"
+      "value": "billing"
     },
     "actual": {
-      "request_id": "route-new-010",
+      "request_id": "route-006",
       "decision": "route",
       "type": "choice",
       "value": "shipping",
       "probs": {
-        "billing": 0.055583,
-        "technical": 0.172037,
-        "account": 0.086136,
-        "shipping": 0.588774,
-        "general": 0.09747
+        "billing": 0.138185,
+        "technical": 0.011895,
+        "account": 0.349339,
+        "shipping": 0.44082,
+        "general": 0.059761
       },
-      "confidence": 0.588774,
+      "confidence": 0.44082,
       "abstain": true,
-      "latency_ms": 16.389
+      "latency_ms": 5.711
     },
     "request_state": {
-      "subject": "Webhook events missing",
-      "body": "Our endpoint receives order-created events but never receives order-updated notifications."
+      "subject": "Update billing address",
+      "body": "I need to change the billing address shown on future invoices."
     },
-    "rationale": "New synthetic routing example. Expected queue: technical; confirm against your actual queue taxonomy."
+    "rationale": "Expected routing category: billing."
   },
   {
-    "request_id": "route-new-011",
+    "request_id": "route-013",
     "task": "route",
     "failure_type": "PREDICTION_MISMATCH",
-    "failure_detail": "Predicted 'account', expected 'technical'",
+    "failure_detail": "Predicted 'general', expected 'technical'",
     "expected": {
       "value": "technical"
     },
     "actual": {
-      "request_id": "route-new-011",
+      "request_id": "route-013",
       "decision": "route",
       "type": "choice",
-      "value": "account",
+      "value": "general",
       "probs": {
-        "billing": 0.033175,
-        "technical": 0.135867,
-        "account": 0.497958,
-        "shipping": 0.018566,
-        "general": 0.314434
+        "billing": 0.197755,
+        "technical": 0.151354,
+        "account": 0.102124,
+        "shipping": 0.006168,
+        "general": 0.542598
       },
-      "confidence": 0.497958,
+      "confidence": 0.542598,
       "abstain": true,
-      "latency_ms": 13.605
+      "latency_ms": 8.001
     },
     "request_state": {
-      "subject": "CSV import rejects valid rows",
-      "body": "The importer rejects rows with dates formatted as YYYY-MM-DD, although the guide says that format is accepted."
+      "subject": "Installation problem",
+      "body": "The installer stops at 70 percent and displays an unexpected error."
     },
-    "rationale": "New synthetic routing example. Expected queue: technical; confirm against your actual queue taxonomy."
+    "rationale": "Expected routing category: technical."
   },
   {
-    "request_id": "route-new-022",
-    "task": "route",
-    "failure_type": "PREDICTION_MISMATCH",
-    "failure_detail": "Predicted 'billing', expected 'account'",
-    "expected": {
-      "value": "account"
-    },
-    "actual": {
-      "request_id": "route-new-022",
-      "decision": "route",
-      "type": "choice",
-      "value": "billing",
-      "probs": {
-        "billing": 0.509377,
-        "technical": 0.075392,
-        "account": 0.330188,
-        "shipping": 0.018517,
-        "general": 0.066527
-      },
-      "confidence": 0.509377,
-      "abstain": true,
-      "latency_ms": 21.24
-    },
-    "request_state": {
-      "subject": "Merge duplicate profiles",
-      "body": "I accidentally created two profiles with different email addresses and want to consolidate them."
-    },
-    "rationale": "New synthetic routing example. Expected queue: account; confirm against your actual queue taxonomy."
-  },
-  {
-    "request_id": "route-new-023",
+    "request_id": "route-020",
     "task": "route",
     "failure_type": "PREDICTION_MISMATCH",
     "failure_detail": "Predicted 'general', expected 'account'",
@@ -98,119 +68,59 @@
       "value": "account"
     },
     "actual": {
-      "request_id": "route-new-023",
+      "request_id": "route-020",
       "decision": "route",
       "type": "choice",
       "value": "general",
       "probs": {
-        "billing": 0.087667,
-        "technical": 0.091411,
-        "account": 0.276165,
-        "shipping": 0.075437,
-        "general": 0.46932
+        "billing": 0.083171,
+        "technical": 0.193214,
+        "account": 0.304114,
+        "shipping": 0.002227,
+        "general": 0.417274
       },
-      "confidence": 0.46932,
+      "confidence": 0.417274,
       "abstain": true,
-      "latency_ms": 19.879
+      "latency_ms": 5.47
     },
     "request_state": {
-      "subject": "Transfer workspace ownership",
-      "body": "The current workspace owner is leaving, and ownership needs to move to another administrator."
+      "subject": "Two-factor authentication",
+      "body": "I lost my phone and cannot complete the two-factor authentication step."
     },
-    "rationale": "New synthetic routing example. Expected queue: account; confirm against your actual queue taxonomy."
+    "rationale": "Expected routing category: account."
   },
   {
-    "request_id": "route-new-025",
+    "request_id": "route-022",
     "task": "route",
     "failure_type": "PREDICTION_MISMATCH",
-    "failure_detail": "Predicted 'general', expected 'shipping'",
+    "failure_detail": "Predicted 'billing', expected 'account'",
     "expected": {
-      "value": "shipping"
+      "value": "account"
     },
     "actual": {
-      "request_id": "route-new-025",
+      "request_id": "route-022",
       "decision": "route",
       "type": "choice",
-      "value": "general",
+      "value": "billing",
       "probs": {
-        "billing": 0.07864,
-        "technical": 0.039855,
-        "account": 0.084365,
-        "shipping": 0.059032,
-        "general": 0.738107
+        "billing": 0.487634,
+        "technical": 0.019316,
+        "account": 0.363008,
+        "shipping": 0.04984,
+        "general": 0.080203
       },
-      "confidence": 0.738107,
-      "abstain": false,
-      "latency_ms": 14.856
-    },
-    "request_state": {
-      "subject": "Customs clearance delay",
-      "body": "The carrier says my international parcel is waiting for customs documentation."
-    },
-    "rationale": "New synthetic routing example. Expected queue: shipping; confirm against your actual queue taxonomy."
-  },
-  {
-    "request_id": "route-new-026",
-    "task": "route",
-    "failure_type": "PREDICTION_MISMATCH",
-    "failure_detail": "Predicted 'account', expected 'shipping'",
-    "expected": {
-      "value": "shipping"
-    },
-    "actual": {
-      "request_id": "route-new-026",
-      "decision": "route",
-      "type": "choice",
-      "value": "account",
-      "probs": {
-        "billing": 0.11407,
-        "technical": 0.20186,
-        "account": 0.398338,
-        "shipping": 0.021849,
-        "general": 0.263883
-      },
-      "confidence": 0.398338,
+      "confidence": 0.487634,
       "abstain": true,
-      "latency_ms": 13.371
+      "latency_ms": 5.935
     },
     "request_state": {
-      "subject": "Locker pickup code missing",
-      "body": "The parcel is at a collection locker, but the pickup PIN was not sent to me."
+      "subject": "Suspended account",
+      "body": "My account was suspended and I would like to understand how to appeal."
     },
-    "rationale": "New synthetic routing example. Expected queue: shipping; confirm against your actual queue taxonomy."
+    "rationale": "Expected routing category: account."
   },
   {
-    "request_id": "route-new-032",
-    "task": "route",
-    "failure_type": "PREDICTION_MISMATCH",
-    "failure_detail": "Predicted 'general', expected 'shipping'",
-    "expected": {
-      "value": "shipping"
-    },
-    "actual": {
-      "request_id": "route-new-032",
-      "decision": "route",
-      "type": "choice",
-      "value": "general",
-      "probs": {
-        "billing": 0.04885,
-        "technical": 0.054844,
-        "account": 0.174154,
-        "shipping": 0.174355,
-        "general": 0.547797
-      },
-      "confidence": 0.547797,
-      "abstain": true,
-      "latency_ms": 16.186
-    },
-    "request_state": {
-      "subject": "Packaging size restriction",
-      "body": "The courier refused collection because the box exceeds the service's permitted dimensions."
-    },
-    "rationale": "New synthetic routing example. Expected queue: shipping; confirm against your actual queue taxonomy."
-  },
-  {
-    "request_id": "route-new-034",
+    "request_id": "route-039",
     "task": "route",
     "failure_type": "PREDICTION_MISMATCH",
     "failure_detail": "Predicted 'billing', expected 'general'",
@@ -218,283 +128,379 @@
       "value": "general"
     },
     "actual": {
-      "request_id": "route-new-034",
+      "request_id": "route-039",
       "decision": "route",
       "type": "choice",
       "value": "billing",
       "probs": {
-        "billing": 0.456311,
-        "technical": 0.109386,
-        "account": 0.091104,
-        "shipping": 0.027869,
-        "general": 0.31533
+        "billing": 0.470293,
+        "technical": 0.08762,
+        "account": 0.21318,
+        "shipping": 0.047995,
+        "general": 0.180912
       },
-      "confidence": 0.456311,
+      "confidence": 0.470293,
       "abstain": true,
-      "latency_ms": 15.496
+      "latency_ms": 6.715
     },
     "request_state": {
-      "subject": "Accessibility statement location",
-      "body": "Where can I find your published accessibility conformance statement?"
+      "subject": "Thank you",
+      "body": "Thanks for helping me earlier. I appreciate the quick response."
     },
-    "rationale": "New synthetic routing example. Expected queue: general; confirm against your actual queue taxonomy."
+    "rationale": "Expected routing category: general."
   },
   {
-    "request_id": "route-new-040",
-    "task": "route",
-    "failure_type": "PREDICTION_MISMATCH",
-    "failure_detail": "Predicted 'billing', expected 'general'",
-    "expected": {
-      "value": "general"
-    },
-    "actual": {
-      "request_id": "route-new-040",
-      "decision": "route",
-      "type": "choice",
-      "value": "billing",
-      "probs": {
-        "billing": 0.552061,
-        "technical": 0.033328,
-        "account": 0.170029,
-        "shipping": 0.018849,
-        "general": 0.225733
-      },
-      "confidence": 0.552061,
-      "abstain": true,
-      "latency_ms": 12.818
-    },
-    "request_state": {
-      "subject": "Newsletter subscription",
-      "body": "How can I subscribe to product announcements without receiving promotional offers?"
-    },
-    "rationale": "New synthetic routing example. Expected queue: general; confirm against your actual queue taxonomy."
-  },
-  {
-    "request_id": "approve-new-001",
+    "request_id": "approve-002",
     "task": "approve",
     "failure_type": "PREDICTION_MISMATCH",
-    "failure_detail": "Predicted False, expected True (p_true=0.4809, abstain=True)",
+    "failure_detail": "Predicted False, expected True (p_true=0.4688, abstain=True)",
     "expected": {
       "value": true,
       "abstain": false
     },
     "actual": {
-      "request_id": "approve-new-001",
+      "request_id": "approve-002",
       "decision": "approve",
       "type": "binary",
       "value": false,
-      "p_true": 0.480879,
+      "p_true": 0.468768,
       "abstain": true,
-      "latency_ms": 10.662
+      "latency_ms": 10.959
     },
     "request_state": {
-      "subject": "Metered usage overcharge verified",
-      "body": "Usage ledger records 120 units, while the invoice billed 210; the discrepancy is confirmed by an administrator.",
-      "amount": 32,
-      "customer_tier": "business"
-    },
-    "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
-  },
-  {
-    "request_id": "approve-new-002",
-    "task": "approve",
-    "failure_type": "PREDICTION_MISMATCH",
-    "failure_detail": "Predicted False, expected True (p_true=0.2682, abstain=True)",
-    "expected": {
-      "value": true,
-      "abstain": false
-    },
-    "actual": {
-      "request_id": "approve-new-002",
-      "decision": "approve",
-      "type": "binary",
-      "value": false,
-      "p_true": 0.268239,
-      "abstain": true,
-      "latency_ms": 11.434
-    },
-    "request_state": {
-      "subject": "Service credit for missed SLA",
-      "body": "Monitoring confirms uptime fell below the contracted SLA and the signed agreement specifies a credit.",
-      "amount": 240,
-      "customer_tier": "enterprise"
-    },
-    "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
-  },
-  {
-    "request_id": "approve-new-003",
-    "task": "approve",
-    "failure_type": "PREDICTION_MISMATCH",
-    "failure_detail": "Predicted False, expected True (p_true=0.0500, abstain=False)",
-    "expected": {
-      "value": true,
-      "abstain": false
-    },
-    "actual": {
-      "request_id": "approve-new-003",
-      "decision": "approve",
-      "type": "binary",
-      "value": false,
-      "p_true": 0.05,
-      "abstain": false,
-      "latency_ms": 0.048
-    },
-    "request_state": {
-      "subject": "Replacement part covered by warranty",
-      "body": "Serial number and purchase date are verified; the component failed within the stated warranty period.",
-      "amount": 86,
+      "subject": "Refund after confirmed damage",
+      "body": "Inspection photos and warehouse notes confirm the item arrived broken. Policy permits a refund.",
+      "amount": 35,
       "customer_tier": "standard"
     },
-    "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
   },
   {
-    "request_id": "approve-new-007",
+    "request_id": "approve-003",
     "task": "approve",
     "failure_type": "PREDICTION_MISMATCH",
-    "failure_detail": "Predicted False, expected True (p_true=0.0500, abstain=False)",
+    "failure_detail": "Predicted False, expected True (p_true=0.5925, abstain=True)",
     "expected": {
       "value": true,
       "abstain": false
     },
     "actual": {
-      "request_id": "approve-new-007",
+      "request_id": "approve-003",
       "decision": "approve",
       "type": "binary",
       "value": false,
-      "p_true": 0.05,
-      "abstain": false,
-      "latency_ms": 0.058
+      "p_true": 0.59245,
+      "abstain": true,
+      "latency_ms": 10.024
     },
     "request_state": {
-      "subject": "Return received at warehouse",
-      "body": "Warehouse scan confirms receipt of the returned item and the order qualifies under the written return terms.",
-      "amount": 119,
+      "subject": "Refund within return window",
+      "body": "The item is unused, proof of purchase is present, and the request is within the 30-day return window.",
+      "amount": 49,
       "customer_tier": "standard"
     },
-    "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
   },
   {
-    "request_id": "approve-new-026",
+    "request_id": "approve-005",
     "task": "approve",
     "failure_type": "PREDICTION_MISMATCH",
-    "failure_detail": "Predicted False, expected True (p_true=0.5116, abstain=True)",
+    "failure_detail": "Predicted False, expected True (p_true=0.5215, abstain=True)",
     "expected": {
       "value": true,
       "abstain": false
     },
     "actual": {
-      "request_id": "approve-new-026",
+      "request_id": "approve-005",
       "decision": "approve",
       "type": "binary",
       "value": false,
-      "p_true": 0.511607,
+      "p_true": 0.521548,
       "abstain": true,
-      "latency_ms": 11.032
+      "latency_ms": 7.837
     },
     "request_state": {
-      "subject": "Verified unused annual add-on",
-      "body": "The add-on was not activated, cancellation occurred inside the contract's grace period, and the terms allow reversal.",
-      "amount": 64,
+      "subject": "Service outage credit",
+      "body": "Monitoring confirms a four-hour outage, and policy allows a credit for this duration.",
+      "amount": 25,
       "customer_tier": "premium"
     },
-    "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
   },
   {
-    "request_id": "approve-new-027",
+    "request_id": "approve-006",
     "task": "approve",
     "failure_type": "PREDICTION_MISMATCH",
-    "failure_detail": "Predicted False, expected True (p_true=0.6929, abstain=True)",
+    "failure_detail": "Predicted False, expected True (p_true=0.0500, abstain=False)",
     "expected": {
       "value": true,
       "abstain": false
     },
     "actual": {
-      "request_id": "approve-new-027",
+      "request_id": "approve-006",
       "decision": "approve",
       "type": "binary",
       "value": false,
-      "p_true": 0.692928,
+      "p_true": 0.05,
+      "abstain": false,
+      "latency_ms": 0.098
+    },
+    "request_state": {
+      "subject": "Wrong item shipped",
+      "body": "Packing records and customer photos confirm the wrong item was shipped. Policy allows a refund.",
+      "amount": 60,
+      "customer_tier": "standard"
+    },
+    "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+  },
+  {
+    "request_id": "approve-020",
+    "task": "approve",
+    "failure_type": "UNEXPECTED_NO_ABSTENTION",
+    "failure_detail": "Ambiguous approval case expected abstain=True, but API returned abstain=False (p_true=0.7675, value=True)",
+    "expected": {
+      "value": null,
+      "abstain": true
+    },
+    "actual": {
+      "request_id": "approve-020",
+      "decision": "approve",
+      "type": "binary",
+      "value": true,
+      "p_true": 0.767526,
+      "abstain": false,
+      "latency_ms": 10.75
+    },
+    "request_state": {
+      "subject": "Possible duplicate payment",
+      "body": "Customer believes a duplicate charge occurred, but only one transaction is visible.",
+      "amount": 20,
+      "customer_tier": "premium"
+    },
+    "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+  },
+  {
+    "request_id": "approve-022",
+    "task": "approve",
+    "failure_type": "UNEXPECTED_NO_ABSTENTION",
+    "failure_detail": "Ambiguous approval case expected abstain=True, but API returned abstain=False (p_true=0.0000, value=False)",
+    "expected": {
+      "value": null,
+      "abstain": true
+    },
+    "actual": {
+      "request_id": "approve-022",
+      "decision": "approve",
+      "type": "binary",
+      "value": false,
+      "p_true": 0.0,
+      "abstain": false,
+      "latency_ms": 6.95
+    },
+    "request_state": {
+      "subject": "Exceptional refund request",
+      "body": "Customer requests an exception due to personal circumstances. No policy or supporting documents are included.",
+      "amount": 100,
+      "customer_tier": "premium"
+    },
+    "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+  },
+  {
+    "request_id": "approve-024",
+    "task": "approve",
+    "failure_type": "UNEXPECTED_NO_ABSTENTION",
+    "failure_detail": "Ambiguous approval case expected abstain=True, but API returned abstain=False (p_true=0.0500, value=False)",
+    "expected": {
+      "value": null,
+      "abstain": true
+    },
+    "actual": {
+      "request_id": "approve-024",
+      "decision": "approve",
+      "type": "binary",
+      "value": false,
+      "p_true": 0.05,
+      "abstain": false,
+      "latency_ms": 0.074
+    },
+    "request_state": {
+      "subject": "Refund after replacement",
+      "body": "A replacement was shipped. Customer now requests a refund, but policy on both is unspecified.",
+      "amount": 70,
+      "customer_tier": "standard"
+    },
+    "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+  },
+  {
+    "request_id": "approve-028",
+    "task": "approve",
+    "failure_type": "PREDICTION_MISMATCH",
+    "failure_detail": "Predicted False, expected True (p_true=0.2253, abstain=False)",
+    "expected": {
+      "value": true,
+      "abstain": false
+    },
+    "actual": {
+      "request_id": "approve-028",
+      "decision": "approve",
+      "type": "binary",
+      "value": false,
+      "p_true": 0.225343,
+      "abstain": false,
+      "latency_ms": 8.099
+    },
+    "request_state": {
+      "subject": "Verified billing plan mismatch",
+      "body": "Signed plan is $10/month, but invoices show a $30 monthly charge for three months.",
+      "amount": 60,
+      "customer_tier": "premium"
+    },
+    "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+  },
+  {
+    "request_id": "approve-029",
+    "task": "approve",
+    "failure_type": "UNEXPECTED_NO_ABSTENTION",
+    "failure_detail": "Ambiguous approval case expected abstain=True, but API returned abstain=False (p_true=0.0500, value=False)",
+    "expected": {
+      "value": null,
+      "abstain": true
+    },
+    "actual": {
+      "request_id": "approve-029",
+      "decision": "approve",
+      "type": "binary",
+      "value": false,
+      "p_true": 0.05,
+      "abstain": false,
+      "latency_ms": 0.06
+    },
+    "request_state": {
+      "subject": "Refund pending investigation",
+      "body": "The claim may be eligible, but the required fraud review is still open.",
+      "amount": 150,
+      "customer_tier": "standard"
+    },
+    "rationale": "Synthetic test expectation; apply your actual business policy before treating this as ground truth."
+  },
+  {
+    "request_id": "grounded-012",
+    "task": "grounded",
+    "failure_type": "PREDICTION_MISMATCH",
+    "failure_detail": "Predicted True, expected False (p_true=0.9012, abstain=False)",
+    "expected": {
+      "value": false,
+      "abstain": false
+    },
+    "actual": {
+      "request_id": "grounded-012",
+      "decision": "grounded",
+      "type": "binary",
+      "value": true,
+      "p_true": 0.901229,
+      "abstain": false,
+      "latency_ms": 5.591
+    },
+    "request_state": {
+      "draft_reply": "The basic plan includes unlimited projects.",
+      "kb_article": "The basic plan allows up to five active projects."
+    },
+    "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+  },
+  {
+    "request_id": "grounded-013",
+    "task": "grounded",
+    "failure_type": "PREDICTION_MISMATCH",
+    "failure_detail": "Predicted False, expected True (p_true=0.0000, abstain=False)",
+    "expected": {
+      "value": true,
+      "abstain": false
+    },
+    "actual": {
+      "request_id": "grounded-013",
+      "decision": "grounded",
+      "type": "binary",
+      "value": false,
+      "p_true": 0.0,
+      "abstain": false,
+      "latency_ms": 9.837
+    },
+    "request_state": {
+      "draft_reply": "We cannot guarantee a delivery date.",
+      "kb_article": "Delivery dates are estimates and may change."
+    },
+    "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
+  },
+  {
+    "request_id": "grounded-014",
+    "task": "grounded",
+    "failure_type": "PREDICTION_MISMATCH",
+    "failure_detail": "Predicted True, expected False (p_true=0.5223, abstain=True)",
+    "expected": {
+      "value": false,
+      "abstain": false
+    },
+    "actual": {
+      "request_id": "grounded-014",
+      "decision": "grounded",
+      "type": "binary",
+      "value": true,
+      "p_true": 0.522256,
       "abstain": true,
-      "latency_ms": 14.676
+      "latency_ms": 9.582
     },
     "request_state": {
-      "subject": "Wrong tax jurisdiction corrected",
-      "body": "Finance confirmed the invoice used the wrong jurisdiction and approved a correction under documented tax procedure.",
-      "amount": 37,
-      "customer_tier": "business"
+      "draft_reply": "Your parcel is definitely lost.",
+      "kb_article": "Tracking shows the parcel is still in transit."
     },
-    "rationale": "New synthetic approval test. Labels are illustrative and must be aligned with your real refund/credit policy; ambiguous cases should be reviewed rather than automatically decided."
+    "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
   },
   {
-    "request_id": "grounded-new-004",
+    "request_id": "grounded-022",
     "task": "grounded",
     "failure_type": "PREDICTION_MISMATCH",
-    "failure_detail": "Predicted True, expected False (p_true=0.9021, abstain=False)",
+    "failure_detail": "Predicted True, expected False (p_true=0.8917, abstain=False)",
     "expected": {
       "value": false,
       "abstain": false
     },
     "actual": {
-      "request_id": "grounded-new-004",
+      "request_id": "grounded-022",
       "decision": "grounded",
       "type": "binary",
       "value": true,
-      "p_true": 0.902149,
+      "p_true": 0.89173,
       "abstain": false,
-      "latency_ms": 13.609
+      "latency_ms": 10.498
     },
     "request_state": {
-      "draft_reply": "Two-factor authentication is mandatory for every account.",
-      "kb_article": "Two-factor authentication is an optional account security setting."
+      "draft_reply": "The free plan includes priority support.",
+      "kb_article": "Premium subscribers receive priority support. Free subscribers use standard support."
     },
-    "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
   },
   {
-    "request_id": "grounded-new-009",
+    "request_id": "grounded-029",
     "task": "grounded",
     "failure_type": "PREDICTION_MISMATCH",
-    "failure_detail": "Predicted False, expected True (p_true=0.2474, abstain=False)",
+    "failure_detail": "Predicted False, expected True (p_true=0.0000, abstain=False)",
     "expected": {
       "value": true,
       "abstain": false
     },
     "actual": {
-      "request_id": "grounded-new-009",
+      "request_id": "grounded-029",
       "decision": "grounded",
       "type": "binary",
       "value": false,
-      "p_true": 0.247386,
+      "p_true": 0.0,
       "abstain": false,
-      "latency_ms": 13.982
+      "latency_ms": 10.47
     },
     "request_state": {
-      "draft_reply": "A workspace owner can restore an archived project.",
-      "kb_article": "Archived projects can be restored by workspace owners from the Archive page."
+      "draft_reply": "I can help you check the status, but I cannot confirm an exact arrival date from this information.",
+      "kb_article": "Tracking status is available in the order page. Delivery estimates may change."
     },
-    "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
-  },
-  {
-    "request_id": "grounded-new-019",
-    "task": "grounded",
-    "failure_type": "PREDICTION_MISMATCH",
-    "failure_detail": "Predicted False, expected True (p_true=0.3928, abstain=False)",
-    "expected": {
-      "value": true,
-      "abstain": false
-    },
-    "actual": {
-      "request_id": "grounded-new-019",
-      "decision": "grounded",
-      "type": "binary",
-      "value": false,
-      "p_true": 0.392781,
-      "abstain": false,
-      "latency_ms": 9.465
-    },
-    "request_state": {
-      "draft_reply": "The report scheduler supports daily and weekly delivery.",
-      "kb_article": "Scheduled reports can be sent daily or weekly by email."
-    },
-    "rationale": "New synthetic entailment check: the reply should contain only claims supported by the supplied article. These labels are test judgments, not production truth."
+    "rationale": "Synthetic grounding check: determine whether the draft is supported by the supplied knowledge article."
   }
 ]
